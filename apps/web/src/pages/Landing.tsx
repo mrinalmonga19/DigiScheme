@@ -1,117 +1,244 @@
+/**
+ * Landing page — MIA-inspired design system
+ * Lavender canvas · Dark rounded dark sections · Pill CTAs · FAQ accordion
+ */
 import {
-  ArrowRight, CheckCircle2, FileText, MessageCircle, SearchCheck,
+  ArrowUpRight, ChevronDown, ChevronUp, FileText, MessageCircle, SearchCheck,
   ShieldCheck, Sparkles, Star, UserRoundCheck, Zap,
 } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../state/app';
 
-/* ─── Floating isometric icon card (hero decoration) ─── */
-function FloatCard({ emoji, label, style }: { emoji: string; label: string; style: React.CSSProperties }) {
-  return (
-    <div
-      aria-hidden
-      className="decor pointer-events-none absolute flex flex-col items-center gap-1 select-none"
-      style={style}
+/* ─────────────────────────────────────────────────────────────────
+   DESIGN TOKENS  (MIA-faithful)
+   Canvas:  #F4F4FE   Dark surface: #131416   Brand: #4338CA
+   ───────────────────────────────────────────────────────────────── */
+const C = {
+  canvas:  '#F4F4FE',
+  dark:    '#131416',
+  darkEl:  '#1C1E22',
+  brand:   '#4338CA',
+  brandLt: '#EDE9FE',
+  teal:    '#0D9488',
+  muted:   '#4B5162',
+  border:  '#E5E7EB',
+  darkBorder: 'rgba(255,255,255,0.08)',
+  darkText:   '#A0A5B5',
+};
+
+/* ═══ Shared primitives ═══════════════════════════════════════════ */
+
+/** Primary pill button with circular arrow badge — MIA signature CTA */
+function PillCTA({
+  children, onClick, disabled, secondary = false, testId,
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+  disabled?: boolean;
+  secondary?: boolean;
+  testId?: string;
+}) {
+  return secondary ? (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-800 transition hover:bg-slate-50 disabled:opacity-50"
     >
-      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/80 shadow-lg backdrop-blur-sm text-3xl"
-        style={{ transform: 'rotate(-8deg)' }}>
-        {emoji}
-      </div>
-      <span className="rounded-full bg-white/70 px-2 py-0.5 text-xs font-semibold text-brand backdrop-blur-sm">{label}</span>
+      {children}
+    </button>
+  ) : (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      data-testid={testId}
+      className="group inline-flex items-center gap-3 rounded-full px-5 py-3 text-base font-bold text-white transition disabled:opacity-50"
+      style={{ background: C.brand }}
+    >
+      {children}
+      {/* Circular arrow badge — MIA signature */}
+      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 transition group-hover:bg-white/30">
+        <ArrowUpRight className="h-4 w-4" />
+      </span>
+    </button>
+  );
+}
+
+/** Trust / social proof badge pill */
+function TrustBadge({ stars, label }: { stars?: boolean; label: string }) {
+  return (
+    <div className="inline-flex items-center gap-2 rounded-xl border bg-white px-4 py-2 shadow-sm" style={{ borderColor: C.border }}>
+      {stars && (
+        <span className="flex gap-0.5">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+          ))}
+        </span>
+      )}
+      <span className="text-sm font-semibold text-slate-700">{label}</span>
     </div>
   );
 }
 
-/* ─── Pill badge (feature tags like "Identities", "Governance") ─── */
-function Pill({ label }: { label: string }) {
+/** Tag pill used in section headers */
+function TagPill({ label }: { label: string }) {
   return (
-    <span className="inline-flex items-center rounded-full border border-indigo-200 bg-white/10 px-4 py-1.5 text-sm font-semibold text-indigo-100 backdrop-blur-sm">
+    <span
+      className="inline-flex items-center rounded-full px-4 py-1.5 text-sm font-semibold"
+      style={{ background: C.brandLt, color: C.brand }}
+    >
       {label}
     </span>
   );
 }
 
-/* ─── Review badge (Capterra / Play Store style) ─── */
-function ReviewBadge({ store, rating }: { store: string; rating: string }) {
+/** Floating decoration card — hero isometric icons */
+function FloatCard({
+  emoji, label, style, rotate = -8,
+}: { emoji: string; label: string; style: React.CSSProperties; rotate?: number }) {
   return (
-    <div className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 shadow-sm">
-      <div className="flex gap-0.5">
-        {[...Array(5)].map((_, i) => (
-          <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-        ))}
+    <div
+      aria-hidden
+      className="decor pointer-events-none absolute select-none"
+      style={style}
+    >
+      <div
+        className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-xl text-3xl"
+        style={{ transform: `rotate(${rotate}deg)` }}
+      >
+        {emoji}
       </div>
-      <span className="font-bold text-slate-900">{rating}</span>
-      <span className="text-sm text-slate-500">{store}</span>
+      <span
+        className="mt-1.5 block rounded-full bg-white/90 px-2 py-0.5 text-center text-[11px] font-bold shadow"
+        style={{ color: C.brand }}
+      >
+        {label}
+      </span>
     </div>
   );
 }
 
-/* ─── Feature card for "four pillars" section ─── */
-function PillarCard({ icon: Icon, title, desc, accent }: {
+/** Dark pillar feature card */
+function PillarCard({
+  icon: Icon, title, desc, accentColor,
+}: {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   desc: string;
-  accent: string;
+  accentColor: string;
 }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition hover:bg-white/10">
-      <div className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ${accent}`}>
+    <div
+      className="rounded-2xl p-6 transition hover:scale-[1.01]"
+      style={{ background: C.darkEl, border: `1px solid ${C.darkBorder}` }}
+    >
+      <div
+        className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl"
+        style={{ background: accentColor }}
+      >
         <Icon className="h-6 w-6 text-white" />
       </div>
       <h3 className="mb-2 text-lg font-bold text-white">{title}</h3>
-      <p className="text-sm leading-relaxed text-indigo-200">{desc}</p>
+      <p className="text-sm leading-relaxed" style={{ color: C.darkText }}>{desc}</p>
     </div>
   );
 }
 
-/* ─── Scheme app grid (mimics the MIA SaaS logo grid) ─── */
-function SchemeGrid() {
-  const schemes = [
-    { emoji: '🎓', name: 'Scholarships', color: 'from-blue-500 to-blue-700' },
-    { emoji: '🌾', name: 'Kisan Yojana', color: 'from-green-500 to-green-700' },
-    { emoji: '🏥', name: 'Health Cover', color: 'from-red-500 to-red-700' },
-    { emoji: '🏠', name: 'Housing', color: 'from-orange-500 to-orange-700' },
-    { emoji: '👩‍💼', name: 'Women Empow.', color: 'from-pink-500 to-pink-700' },
-    { emoji: '⚡', name: 'Solar Energy', color: 'from-yellow-500 to-yellow-700' },
-    { emoji: '💼', name: 'Employment', color: 'from-indigo-500 to-indigo-700' },
-    { emoji: '🧒', name: 'Child Welfare', color: 'from-teal-500 to-teal-700' },
-    { emoji: '🛡️', name: 'Insurance', color: 'from-purple-500 to-purple-700' },
-  ];
+/** Numbered "how it works" card (01 / 02 / 03) */
+function StepCard({ num, title, desc }: { num: string; title: string; desc: string }) {
   return (
-    <div className="decor relative mx-auto grid max-w-xs grid-cols-3 gap-3 sm:max-w-sm">
-      {schemes.map((s) => (
+    <div
+      className="rounded-3xl p-8"
+      style={{ background: '#FFFFFF', border: `1px solid ${C.border}` }}
+    >
+      <div className="mb-4 text-5xl font-black" style={{ color: C.brandLt, letterSpacing: '-0.03em' }}>
+        {num}
+      </div>
+      <h3 className="mb-2 text-xl font-bold" style={{ color: '#111215', letterSpacing: '-0.01em' }}>{title}</h3>
+      <p className="text-base leading-relaxed" style={{ color: C.muted }}>{desc}</p>
+    </div>
+  );
+}
+
+/** FAQ accordion item */
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      className="border-b py-5"
+      style={{ borderColor: C.border }}
+    >
+      <button
+        type="button"
+        className="flex w-full items-center justify-between gap-4 text-left"
+        onClick={() => setOpen((x) => !x)}
+        aria-expanded={open}
+      >
+        <span className="text-base font-semibold" style={{ color: '#111215' }}>{q}</span>
+        <span
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white transition"
+          style={{ background: C.brand }}
+        >
+          {open ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+        </span>
+      </button>
+      {open && (
+        <p className="mt-3 text-sm leading-relaxed" style={{ color: C.muted }}>{a}</p>
+      )}
+    </div>
+  );
+}
+
+/** Stat block */
+function StatBlock({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="text-center">
+      <div className="text-4xl font-black" style={{ color: C.brand, letterSpacing: '-0.03em' }}>{value}</div>
+      <div className="mt-1 text-sm font-medium" style={{ color: C.muted }}>{label}</div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SCHEME GRID  — mimics MIA's colourful SaaS logo mosaic
+   ═══════════════════════════════════════════════════════════════════ */
+const SCHEMES = [
+  { emoji: '🎓', name: 'Scholarships', bg: 'linear-gradient(135deg,#3B82F6,#1D4ED8)' },
+  { emoji: '🌾', name: 'PM-Kisan', bg: 'linear-gradient(135deg,#22C55E,#15803D)' },
+  { emoji: '🏥', name: 'Ayushman', bg: 'linear-gradient(135deg,#EF4444,#B91C1C)' },
+  { emoji: '🏠', name: 'Housing', bg: 'linear-gradient(135deg,#F97316,#C2410C)' },
+  { emoji: '👩‍💼', name: 'Women', bg: 'linear-gradient(135deg,#EC4899,#9D174D)' },
+  { emoji: '⚡', name: 'Solar', bg: 'linear-gradient(135deg,#EAB308,#A16207)' },
+  { emoji: '💼', name: 'MNREGA', bg: 'linear-gradient(135deg,#8B5CF6,#5B21B6)' },
+  { emoji: '🧒', name: 'Child Care', bg: 'linear-gradient(135deg,#06B6D4,#0E7490)' },
+  { emoji: '🛡️', name: 'Insurance', bg: 'linear-gradient(135deg,#6366F1,#4338CA)' },
+];
+
+function SchemeGrid() {
+  return (
+    <div className="decor grid grid-cols-3 gap-3">
+      {SCHEMES.map((s, i) => (
         <div
           key={s.name}
-          className={`flex flex-col items-center justify-center gap-1.5 rounded-2xl bg-gradient-to-br ${s.color} p-3 shadow-xl aspect-square`}
-          style={{ transform: `rotate(${Math.random() > 0.5 ? '2deg' : '-2deg'})` }}
+          className="flex aspect-square flex-col items-center justify-center gap-2 rounded-2xl shadow-xl"
+          style={{
+            background: s.bg,
+            transform: `rotate(${i % 2 === 0 ? '2deg' : '-2deg'}) scale(${i === 4 ? 1.1 : 1})`,
+          }}
         >
-          <span className="text-2xl">{s.emoji}</span>
-          <span className="text-center text-[10px] font-bold text-white leading-tight">{s.name}</span>
+          <span className="text-3xl">{s.emoji}</span>
+          <span className="text-center text-[10px] font-bold leading-tight text-white">{s.name}</span>
         </div>
       ))}
     </div>
   );
 }
 
-/* ─── Step card for "How it works" ─── */
-function StepCard({ step, title, desc }: { step: string; title: string; desc: string }) {
-  return (
-    <div className="flex gap-4">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-saffron font-black text-white text-lg">
-        {step}
-      </div>
-      <div>
-        <h3 className="font-bold text-slate-900">{title}</h3>
-        <p className="mt-1 text-sm text-slate-600">{desc}</p>
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════
-   MAIN LANDING PAGE
-═══════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════
+   MAIN PAGE
+   ═══════════════════════════════════════════════════════════════════ */
 export default function Landing() {
   const { t, session, start, language, languages, setLanguage } = useApp();
   const nav = useNavigate();
@@ -127,227 +254,331 @@ export default function Landing() {
     finally { setBusy(false); }
   };
 
-  return (
-    <div className="min-h-screen overflow-x-hidden" style={{ fontFamily: 'inherit' }}>
+  const faqs = [
+    {
+      q: 'Is DigiScheme free to use?',
+      a: 'Yes, completely free. DigiScheme is a public interest tool. We never charge citizens to discover schemes they are entitled to.',
+    },
+    {
+      q: 'Do I need to link my Aadhaar?',
+      a: 'No. You can browse and check eligibility without linking Aadhaar. DigiLocker integration is optional and only enhances result accuracy with a Verified badge.',
+    },
+    {
+      q: 'How does DigiScheme know I am eligible?',
+      a: 'Our eligibility engine applies official rules (income bands, caste categories, state residency, age limits) published by each scheme. You answer a few questions; we match instantly across 300+ schemes.',
+    },
+    {
+      q: 'Is my personal data safe?',
+      a: 'All data is encrypted in transit and at rest. We never sell data or share it with third parties. You can delete your profile from Settings at any time.',
+    },
+    {
+      q: 'How many languages are supported?',
+      a: 'Nine languages today: English, Hindi, Punjabi, Tamil, Kannada, Bengali, Marathi, Telugu, and Gujarati. The AI understands mixed-language (Hinglish) messages too.',
+    },
+    {
+      q: 'Can I apply for schemes directly through DigiScheme?',
+      a: 'DigiScheme provides official application links and step-by-step guidance. Final submission always goes to the government portal — we never intermediate your application.',
+    },
+  ];
 
-      {/* ── NAVBAR ── */}
-      <header className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-          <a href="/" className="flex items-center gap-2 text-xl font-black tracking-tight text-brand">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand text-white text-sm font-black">DS</span>
+  /* ── render ───────────────────────────────────────────────────── */
+  return (
+    <div className="overflow-x-hidden" style={{ background: C.canvas, color: '#111215' }}>
+
+      {/* ══ NAVBAR ════════════════════════════════════════════════ */}
+      <header
+        className="sticky top-0 z-50 border-b backdrop-blur-md"
+        style={{ background: 'rgba(244,244,254,0.92)', borderColor: C.border }}
+      >
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3">
+          {/* Logo */}
+          <a href="/" className="flex items-center gap-2 text-xl font-black tracking-tight" style={{ color: '#111215', letterSpacing: '-0.02em' }}>
+            <span
+              className="flex h-9 w-9 items-center justify-center rounded-xl text-sm font-black text-white"
+              style={{ background: C.brand }}
+            >
+              DS
+            </span>
             DigiScheme
           </a>
-          <nav className="hidden items-center gap-6 md:flex" aria-label="Site navigation">
-            <a href="#features" className="text-sm font-medium text-slate-600 hover:text-brand transition-colors">Features</a>
-            <a href="#how" className="text-sm font-medium text-slate-600 hover:text-brand transition-colors">How it works</a>
-            <a href="#languages" className="text-sm font-medium text-slate-600 hover:text-brand transition-colors">Languages</a>
+
+          {/* Nav links */}
+          <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
+            {[
+              ['#features', 'Features'],
+              ['#howitworks', 'How it works'],
+              ['#languages', 'Languages'],
+            ].map(([href, label]) => (
+              <a
+                key={href}
+                href={href}
+                className="text-sm font-medium transition-colors"
+                style={{ color: C.muted }}
+                onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = C.brand)}
+                onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = C.muted)}
+              >
+                {label}
+              </a>
+            ))}
+            <a
+              href="#languages"
+              className="rounded-full px-4 py-1.5 text-sm font-semibold transition"
+              style={{ background: C.brandLt, color: C.brand }}
+            >
+              9 Languages
+            </a>
           </nav>
+
+          {/* Right CTAs */}
           <div className="flex items-center gap-3">
             {session?.authenticated && (
-              <button
-                type="button"
-                onClick={() => nav('/chat')}
-                className="text-sm font-semibold text-brand hover:underline"
-              >
+              <button type="button" onClick={() => nav('/chat')} className="text-sm font-bold" style={{ color: C.brand }}>
                 Open App
               </button>
             )}
-            <button
-              type="button"
-              onClick={() => void go()}
-              disabled={busy}
-              className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-brand-600 disabled:opacity-50"
-            >
-              {authed ? 'Go to Chat' : 'Get Started'} <ArrowRight className="h-4 w-4" />
-            </button>
+            <PillCTA onClick={() => void go()} disabled={busy} testId="start-nav">
+              {authed ? 'Go to Chat' : 'Start for Free'}
+            </PillCTA>
           </div>
         </div>
       </header>
 
-      {/* ══════════════════════════════════════════
-          SECTION 1 — HERO (lavender bg, centered)
-      ══════════════════════════════════════════ */}
-      <section
-        className="relative overflow-hidden px-4 pb-24 pt-20 text-center"
-        style={{ background: 'linear-gradient(160deg, #eef0fa 0%, #e8eaf8 40%, #f0eeff 100%)' }}
-      >
-        {/* Floating decorative icons */}
-        <FloatCard emoji="🎓" label="Scholarship" style={{ top: '10%', left: '5%' }} />
-        <FloatCard emoji="🌾" label="Kisan" style={{ top: '20%', left: '12%' }} />
-        <FloatCard emoji="🏥" label="Health" style={{ top: '55%', left: '4%' }} />
-        <FloatCard emoji="🏠" label="Housing" style={{ top: '8%', right: '6%' }} />
-        <FloatCard emoji="👩‍💼" label="Women" style={{ top: '30%', right: '4%' }} />
-        <FloatCard emoji="⚡" label="Solar" style={{ top: '60%', right: '8%' }} />
+      {/* ══ SECTION 1 — HERO ══════════════════════════════════════ */}
+      <section className="relative overflow-hidden px-6 pb-32 pt-24 text-center" style={{ background: C.canvas }}>
+        {/* Floating icons */}
+        <FloatCard emoji="🎓" label="Scholarship" style={{ top: '8%',  left: '4%'  }} rotate={-10} />
+        <FloatCard emoji="🌾" label="Kisan Nidhi" style={{ top: '30%', left: '8%'  }} rotate={6}  />
+        <FloatCard emoji="🏥" label="Ayushman"    style={{ top: '58%', left: '3%'  }} rotate={-5} />
+        <FloatCard emoji="🏠" label="PM Housing"  style={{ top: '6%',  right: '5%' }} rotate={8}  />
+        <FloatCard emoji="👩‍💼" label="Mahila"     style={{ top: '32%', right: '4%' }} rotate={-9} />
+        <FloatCard emoji="⚡" label="Solar Yojana" style={{ top: '58%', right: '7%' }} rotate={5}  />
 
         <div className="relative mx-auto max-w-3xl">
-          {/* Top badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand/20 bg-white/80 px-4 py-1.5 text-sm font-semibold text-brand shadow-sm backdrop-blur-sm">
-            <Sparkles className="h-4 w-4 text-saffron" aria-hidden />
-            Powered by AI · Available in 9 languages
+          {/* Top announcement badge */}
+          <div
+            className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm font-semibold"
+            style={{ background: '#FFFFFF', borderColor: C.border, color: C.brand }}
+          >
+            <Sparkles className="h-4 w-4" aria-hidden style={{ color: '#F59E0B' }} />
+            Direct citizen benefit · 100% privacy protected 🇮🇳
           </div>
 
-          <h1 className="text-4xl font-black leading-tight tracking-tight text-slate-900 sm:text-5xl md:text-6xl">
+          {/* Hero headline */}
+          <h1
+            className="text-5xl font-bold leading-tight sm:text-6xl md:text-7xl"
+            style={{ color: '#111215', letterSpacing: '-0.03em', lineHeight: 1.1 }}
+          >
             Government schemes,{' '}
-            <span style={{ color: '#1F2761' }}>found and verified.</span>
+            <span style={{ color: C.brand }}>found and verified.</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-xl text-lg text-slate-600">
-            DigiScheme finds every central and state scheme you're eligible for.
-            Verify with DigiLocker, ask in your language, apply in minutes.
+          <p
+            className="mx-auto mt-6 max-w-xl text-lg leading-relaxed"
+            style={{ color: C.muted }}
+          >
+            DigiScheme unifies central and state schemes, DigiLocker verification, and multilingual AI assistance
+            in one sovereign platform. No forced Aadhaar — you decide what to share.
           </p>
 
-          {/* Review badges */}
+          {/* Trust badges */}
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <ReviewBadge store="Play Store" rating="4.9" />
-            <ReviewBadge store="Trusted by 50K+" rating="★★★★★" />
-            <ReviewBadge store="DigiLocker" rating="Official" />
+            <TrustBadge stars label="4.9 / 5.0 · Citizen Reviews" />
+            <TrustBadge stars label="DigiLocker Integrated" />
+            <TrustBadge label="300+ Schemes · Free" />
           </div>
 
-          {/* CTA */}
-          <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <button
-              type="button"
-              onClick={() => void go()}
-              disabled={busy}
-              className="inline-flex items-center gap-2 rounded-full bg-brand px-8 py-4 text-lg font-bold text-white shadow-lg transition hover:bg-brand-600 disabled:opacity-50"
-            >
-              {authed ? 'Open DigiScheme' : 'Check Your Eligibility'} <ArrowRight className="h-5 w-5" />
-            </button>
-            <a
-              href="#how"
-              className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-8 py-4 text-lg font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
-            >
+          {/* CTA row */}
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <PillCTA onClick={() => void go()} disabled={busy} testId="start-hero">
+              {authed ? 'Open DigiScheme' : 'Check Your Eligibility'}
+            </PillCTA>
+            <PillCTA secondary onClick={() => document.getElementById('howitworks')?.scrollIntoView({ behavior: 'smooth' })}>
               See how it works
-            </a>
+            </PillCTA>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          SECTION 2 — DARK "Four pillars" (navy bg)
-      ══════════════════════════════════════════ */}
+      {/* ══ MARQUEE — trusted by ══════════════════════════════════ */}
+      <section className="border-y px-6 py-10" style={{ background: C.canvas, borderColor: C.border }}>
+        <p className="mb-5 text-center text-xs font-semibold uppercase tracking-widest" style={{ color: C.muted }}>
+          Trusted by citizens across India
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
+          {['Delhi', 'Punjab', 'Tamil Nadu', 'Maharashtra', 'Karnataka', 'West Bengal', 'Gujarat'].map((state) => (
+            <span key={state} className="text-base font-bold text-slate-500">{state}</span>
+          ))}
+        </div>
+      </section>
+
+      {/* ══ SECTION 2 — DARK PILLARS ══════════════════════════════
+          Dark section with rounded top corners — MIA signature
+       ══════════════════════════════════════════════════════════ */}
       <section
         id="features"
-        className="px-4 py-20"
-        style={{ background: 'linear-gradient(160deg, #0f0e1a 0%, #1a1830 60%, #12112a 100%)' }}
+        className="px-6 py-20"
+        style={{
+          background: C.dark,
+          borderRadius: '40px 40px 0 0',
+          marginTop: '-1px',
+        }}
       >
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
-            {/* Left: text */}
-            <div>
-              <div className="mb-6 flex flex-wrap gap-2">
-                <Pill label="Schemes" />
-                <Pill label="Verification" />
-                <Pill label="DigiLocker" />
-                <Pill label="Multilingual" />
-              </div>
-              <h2 className="text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl"
-                style={{ color: '#a29bfe' }}>
-                One platform, every scheme you deserve.
-              </h2>
-              <p className="mt-6 text-lg leading-relaxed text-indigo-200">
-                Your profile,{' '}
-                <span className="inline-flex items-center rounded-full bg-saffron/20 px-3 py-0.5 text-sm font-bold text-saffron">verified</span>
-                {' '}documents, and eligibility — in one sovereign platform, driven by the data you choose to share.
-              </p>
+          {/* Header */}
+          <div className="mb-14 text-center">
+            <div className="mb-5 flex flex-wrap justify-center gap-2">
+              {['Schemes', 'Verification', 'Multilingual', 'Privacy'].map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full px-4 py-1.5 text-sm font-semibold"
+                  style={{ background: 'rgba(99,102,241,0.15)', color: '#A5B4FC' }}
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
+            <h2
+              className="mx-auto max-w-2xl text-4xl font-bold sm:text-5xl"
+              style={{ color: '#A5B4FC', letterSpacing: '-0.03em', lineHeight: 1.15 }}
+            >
+              One platform, every scheme you deserve.
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-lg" style={{ color: C.darkText }}>
+              Your profile,{' '}
+              <span className="rounded-full px-3 py-0.5 text-sm font-bold" style={{ background: 'rgba(249,115,22,0.2)', color: '#FB923C' }}>
+                verified
+              </span>
+              {' '}documents, and eligibility — in one sovereign platform.
+            </p>
+          </div>
 
-            {/* Right: scheme grid */}
-            <div className="flex justify-center">
+          {/* Two-column: text + scheme grid */}
+          <div className="mb-16 grid items-center gap-16 lg:grid-cols-2">
+            <div>
+              <ul className="space-y-5">
+                {[
+                  ['🎯', 'Instant eligibility across 300+ central & state schemes'],
+                  ['🛡️', 'DigiLocker-verified results with official "Verified" badge'],
+                  ['🗣️', 'AI assistant in Hindi, Tamil, Bengali and 6 more languages'],
+                  ['📋', 'Step-by-step apply guides with downloadable document kit'],
+                ].map(([icon, text]) => (
+                  <li key={text} className="flex items-start gap-4">
+                    <span className="text-2xl">{icon}</span>
+                    <span className="text-base font-medium text-white">{text}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8">
+                <PillCTA onClick={() => void go()} disabled={busy}>
+                  {authed ? 'Open App' : 'Start Free Check'}
+                </PillCTA>
+              </div>
+            </div>
+            <div className="mx-auto w-full max-w-xs sm:max-w-sm">
               <SchemeGrid />
             </div>
           </div>
 
-          {/* Pillar cards */}
-          <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" id="pillars">
+          {/* Four pillar cards */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <PillarCard
               icon={SearchCheck}
               title="Eligibility Engine"
-              desc="Rules for 300+ central and state schemes. Know instantly what you qualify for."
-              accent="bg-indigo-500"
+              desc="Rules for 300+ central and state schemes matched to your profile instantly. Income, caste, state, age, occupation."
+              accentColor="#4338CA"
             />
             <PillarCard
               icon={ShieldCheck}
               title="DigiLocker Verified"
-              desc="Connect once, get verified results with a 'Verified' badge across all schemes."
-              accent="bg-green-600"
+              desc="Connect once — get a Verified badge across all matching schemes. Your data, your consent, always revocable."
+              accentColor="#0D9488"
             />
             <PillarCard
               icon={MessageCircle}
               title="9 Languages"
-              desc="Ask questions in Hindi, Tamil, Bengali, Gujarati and 5 more. AI understands you."
-              accent="bg-saffron"
+              desc="Ask questions in Hindi, Tamil, Bengali, Gujarati and 5 more. The AI understands Hinglish too."
+              accentColor="#F97316"
             />
             <PillarCard
               icon={FileText}
-              title="Apply with Guide"
-              desc="Step-by-step application walkthroughs with document checklists and PDF kits."
-              accent="bg-purple-600"
+              title="Apply Guides"
+              desc="Step-by-step walkthroughs with document checklists and a downloadable PDF application kit."
+              accentColor="#8B5CF6"
             />
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          SECTION 3 — HOW IT WORKS (white bg)
-      ══════════════════════════════════════════ */}
-      <section id="how" className="bg-white px-4 py-20">
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-12 text-center">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-brand/10 px-4 py-1.5 text-sm font-bold text-brand">
-              <Zap className="h-4 w-4" aria-hidden /> Simple 3-step process
+      {/* ══ SECTION 3 — HOW IT WORKS (white, 01/02/03 cards) ═════ */}
+      <section id="howitworks" className="bg-white px-6 py-24">
+        <div className="mx-auto max-w-5xl">
+          {/* Header */}
+          <div className="mb-14 grid gap-10 lg:grid-cols-2 lg:items-end">
+            <div>
+              <div className="mb-4 flex items-center gap-2">
+                <Zap className="h-5 w-5" style={{ color: C.brand }} aria-hidden />
+                <TagPill label="Simple 3-step process" />
+              </div>
+              <h2
+                className="text-4xl font-bold sm:text-5xl"
+                style={{ color: '#111215', letterSpacing: '-0.03em', lineHeight: 1.15 }}
+              >
+                No forced linking.
+                You choose the source of truth.
+              </h2>
             </div>
-            <h2 className="text-3xl font-black text-slate-900 sm:text-4xl">Get your schemes in minutes</h2>
-            <p className="mt-4 text-slate-600">No paperwork maze. No office visits. Just answers.</p>
+            <p className="text-lg leading-relaxed" style={{ color: C.muted }}>
+              Unlike apps that demand Aadhaar upfront, DigiScheme lets you browse anonymously.
+              Connect DigiLocker when you want verified results — on your terms.
+            </p>
           </div>
 
-          <div className="grid gap-10 md:grid-cols-3">
+          {/* 01 / 02 / 03 cards */}
+          <div className="grid gap-5 md:grid-cols-3">
             <StepCard
-              step="1"
-              title="Tell us about yourself"
-              desc="Answer a few quick questions in your language — state, income, education, category. The AI guides you."
+              num="01"
+              title="Zero data lock-in"
+              desc="Browse and check eligibility anonymously. Answer 4 quick questions — state, income, education, category — in your language."
             />
             <StepCard
-              step="2"
-              title="Verify with DigiLocker"
-              desc="Optionally connect DigiLocker to auto-fill your profile. Your documents, your choice."
+              num="02"
+              title="Smart cascading match"
+              desc="Our rules engine checks your profile against every central and state scheme instantly, showing Eligible or Needs Info results."
             />
             <StepCard
-              step="3"
-              title="See your schemes"
-              desc="Get a personalised list of schemes with Verified or Estimated badges, benefit details, and apply guides."
+              num="03"
+              title="Sovereign & encrypted"
+              desc="Optionally connect DigiLocker for verified results. Your documents never leave the app without your explicit consent."
             />
           </div>
 
           {/* Stats strip */}
-          <div className="mt-16 grid grid-cols-2 gap-6 rounded-3xl border border-slate-100 bg-slate-50 p-8 md:grid-cols-4">
-            {[
-              { stat: '300+', label: 'Schemes covered' },
-              { stat: '9', label: 'Indian languages' },
-              { stat: '100%', label: 'Free to use' },
-              { stat: '0', label: 'Data sold' },
-            ].map(({ stat, label }) => (
-              <div key={label} className="text-center">
-                <div className="text-3xl font-black text-brand">{stat}</div>
-                <div className="mt-1 text-sm text-slate-600">{label}</div>
-              </div>
-            ))}
+          <div
+            className="mt-14 grid grid-cols-2 gap-8 rounded-3xl p-10 md:grid-cols-4"
+            style={{ background: C.canvas, border: `1px solid ${C.border}` }}
+          >
+            <StatBlock value="300+" label="Schemes covered" />
+            <StatBlock value="9"    label="Indian languages" />
+            <StatBlock value="100%" label="Free to use" />
+            <StatBlock value="0"    label="Data ever sold" />
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          SECTION 4 — LANGUAGE SELECTOR + CONSENT
-      ══════════════════════════════════════════ */}
-      <section
-        id="languages"
-        className="px-4 py-20"
-        style={{ background: 'linear-gradient(160deg, #eef0fa 0%, #e8eaf8 100%)' }}
-      >
+      {/* ══ SECTION 4 — LANGUAGE SELECTOR + CONSENT ══════════════ */}
+      <section id="languages" className="px-6 py-24" style={{ background: C.canvas }}>
         <div className="mx-auto max-w-xl">
-          <div className="mb-8 text-center">
-            <h2 className="text-2xl font-black text-slate-900">Choose your language</h2>
-            <p className="mt-2 text-slate-600">DigiScheme speaks your mother tongue.</p>
+          <div className="mb-10 text-center">
+            <TagPill label="Choose your language" />
+            <h2
+              className="mt-4 text-3xl font-bold"
+              style={{ color: '#111215', letterSpacing: '-0.02em' }}
+            >
+              DigiScheme speaks your mother tongue
+            </h2>
+            <p className="mt-3 text-base" style={{ color: C.muted }}>
+              Switch any time. The AI adapts to whichever language you type in.
+            </p>
           </div>
 
           {/* Language grid */}
@@ -360,11 +591,10 @@ export default function Landing() {
                 aria-checked={l.code === language}
                 lang={l.code}
                 onClick={() => void setLanguage(l.code)}
-                className={`tap rounded-2xl border px-3 py-3 text-base font-semibold transition ${
-                  l.code === language
-                    ? 'border-brand bg-brand text-white shadow-md'
-                    : 'border-slate-200 bg-white text-slate-900 hover:border-brand/40 hover:bg-brand/5'
-                }`}
+                className="tap rounded-2xl border px-3 py-3 text-base font-semibold transition"
+                style={l.code === language
+                  ? { background: C.brand, color: '#fff', borderColor: C.brand, boxShadow: '0 4px 14px rgba(67,56,202,0.35)' }
+                  : { background: '#fff', color: '#111215', borderColor: C.border }}
               >
                 {l.native}
               </button>
@@ -372,57 +602,155 @@ export default function Landing() {
           </div>
 
           {/* Consent & CTA card */}
-          <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div
+            className="mt-6 rounded-3xl p-7"
+            style={{ background: '#fff', border: `1px solid ${C.border}`, boxShadow: '0 4px 24px rgba(0,0,0,0.05)' }}
+          >
             <div className="flex items-start gap-3">
-              <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-green-600" aria-hidden />
+              <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0" style={{ color: '#10B981' }} aria-hidden />
               <div>
-                <h3 className="font-bold text-slate-900">{t.ui.consentTitle}</h3>
-                <p className="mt-1 text-sm text-slate-600">{t.ui.consentText}</p>
+                <h3 className="font-bold" style={{ color: '#111215' }}>{t.ui.consentTitle}</h3>
+                <p className="mt-1 text-sm" style={{ color: C.muted }}>{t.ui.consentText}</p>
               </div>
             </div>
 
             {!authed && (
-              <label className="mt-5 flex cursor-pointer items-start gap-3 rounded-xl bg-slate-50 p-3 text-sm transition hover:bg-slate-100">
+              <label
+                className="mt-5 flex cursor-pointer items-start gap-3 rounded-2xl p-4 text-sm transition"
+                style={{ background: C.canvas }}
+              >
                 <input
                   type="checkbox"
-                  className="mt-0.5 h-5 w-5 accent-brand"
+                  className="mt-0.5 h-5 w-5 accent-indigo-600"
                   checked={agreed}
                   onChange={(e) => setAgreed(e.target.checked)}
                   data-testid="agree"
                 />
-                <span className="text-slate-700">{t.ui.agree}</span>
+                <span style={{ color: C.muted }}>{t.ui.agree}</span>
               </label>
             )}
 
-            {error && <p role="alert" className="mt-3 rounded-xl bg-red-50 p-3 text-sm text-red-700">{error}</p>}
+            {error && (
+              <p role="alert" className="mt-3 rounded-xl bg-red-50 p-3 text-sm text-red-700">{error}</p>
+            )}
 
             <button
               type="button"
               onClick={() => void go()}
               disabled={busy || (!authed && !agreed)}
               data-testid="start"
-              className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-saffron px-6 py-4 text-lg font-bold text-white shadow-md transition hover:bg-saffron-600 disabled:opacity-50"
+              className="group mt-5 inline-flex w-full items-center justify-center gap-3 rounded-2xl py-4 text-lg font-bold text-white transition disabled:opacity-50"
+              style={{ background: '#FF6B35' }}
             >
-              {authed ? t.ui.openChat : t.ui.start} <ArrowRight className="h-5 w-5" />
+              {authed ? t.ui.openChat : t.ui.start}
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 group-hover:bg-white/30">
+                <ArrowUpRight className="h-4 w-4" />
+              </span>
             </button>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          SECTION 5 — TRUST / PRIVACY FOOTER STRIP
-      ══════════════════════════════════════════ */}
-      <section className="border-t border-slate-200 bg-white px-4 py-10">
+      {/* ══ SECTION 5 — FAQ ACCORDION ════════════════════════════ */}
+      <section className="bg-white px-6 py-24">
         <div className="mx-auto max-w-4xl">
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-500">
+          <div className="grid gap-14 lg:grid-cols-2 lg:items-start">
+            {/* Left: heading with scribble-style accent */}
+            <div>
+              <h2
+                className="text-4xl font-bold sm:text-5xl"
+                style={{ color: '#111215', letterSpacing: '-0.03em', lineHeight: 1.1 }}
+              >
+                All about{' '}
+                <span style={{ color: C.brand, borderBottom: `3px solid ${C.brand}` }}>
+                  DigiScheme
+                </span>
+              </h2>
+              <p className="mt-6 text-base" style={{ color: C.muted }}>
+                Everything you need to know before you start checking your eligibility.
+              </p>
+              <div className="mt-8">
+                <PillCTA onClick={() => void go()} disabled={busy}>
+                  {authed ? 'Open App' : 'Get Started Free'}
+                </PillCTA>
+              </div>
+            </div>
+
+            {/* Right: accordion */}
+            <div>
+              {faqs.map((item) => (
+                <FAQItem key={item.q} q={item.q} a={item.a} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ SECTION 6 — PUZZLE-PIECE CTA BANNER ══════════════════ */}
+      <section className="px-6 py-20" style={{ background: C.canvas }}>
+        <div className="mx-auto max-w-4xl">
+          <div
+            className="relative overflow-hidden rounded-3xl px-10 py-14 text-center"
+            style={{ background: C.brand }}
+          >
+            {/* Background watermark */}
+            <div
+              aria-hidden
+              className="decor pointer-events-none absolute inset-0 flex items-center justify-center opacity-10 select-none"
+              style={{ fontSize: '18rem', fontWeight: 900, color: '#fff', letterSpacing: '-0.05em' }}
+            >
+              DS
+            </div>
+
+            <div className="relative">
+              <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-sm font-semibold text-white">
+                <UserRoundCheck className="h-4 w-4" aria-hidden /> Free for all citizens
+              </span>
+              <h2
+                className="mx-auto max-w-xl text-3xl font-bold text-white sm:text-4xl"
+                style={{ letterSpacing: '-0.03em', lineHeight: 1.15 }}
+              >
+                Try{' '}
+                <span className="rounded-xl bg-white/20 px-3">DigiScheme</span>
+                {' '}for your family.
+              </h2>
+              <p className="mx-auto mt-4 max-w-md text-indigo-200">
+                One profile, the whole family's schemes. Central pension, scholarships, housing — all found in minutes.
+              </p>
+              <div className="mt-8 flex flex-wrap justify-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => void go()}
+                  disabled={busy}
+                  className="group inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-base font-bold transition hover:bg-indigo-50 disabled:opacity-50"
+                  style={{ color: C.brand }}
+                >
+                  Start the Free Check
+                  <span
+                    className="flex h-8 w-8 items-center justify-center rounded-full text-white transition group-hover:scale-105"
+                    style={{ background: C.brand }}
+                  >
+                    <ArrowUpRight className="h-4 w-4" />
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ SECTION 7 — TRUST STRIP ══════════════════════════════ */}
+      <section className="border-t bg-white px-6 py-12" style={{ borderColor: C.border }}>
+        <div className="mx-auto max-w-4xl">
+          <div className="flex flex-wrap justify-center gap-8 text-sm" style={{ color: C.muted }}>
             {[
               { icon: ShieldCheck, text: 'No Aadhaar stored' },
-              { icon: CheckCircle2, text: 'DigiLocker official integration' },
+              { icon: SearchCheck, text: 'DigiLocker official integration' },
               { icon: UserRoundCheck, text: 'You own your data' },
-              { icon: Sparkles, text: 'AI-powered, human-reviewed rules' },
+              { icon: Sparkles,    text: 'AI-powered, human-reviewed rules' },
             ].map(({ icon: Icon, text }) => (
               <div key={text} className="flex items-center gap-2">
-                <Icon className="h-4 w-4 text-green-600" aria-hidden />
+                <Icon className="h-4 w-4" style={{ color: '#10B981' }} aria-hidden />
                 <span>{text}</span>
               </div>
             ))}
@@ -430,16 +758,71 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
+      {/* ══ FOOTER — dark rounded top ════════════════════════════ */}
       <footer
-        className="px-4 py-10 text-center text-sm text-indigo-200"
-        style={{ background: '#0f0e1a' }}
+        style={{
+          background: C.dark,
+          borderRadius: '36px 36px 0 0',
+          marginTop: '-1px',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
       >
-        <p className="font-semibold text-white">DigiScheme</p>
-        <p className="mt-1">Made in India · AI-powered government scheme discovery</p>
-        <p className="mt-3 text-indigo-400 text-xs">
-          DigiScheme is an independent eligibility assistant. Official application portals are linked directly from each scheme.
-        </p>
+        {/* Watermark */}
+        <div
+          aria-hidden
+          className="decor pointer-events-none absolute inset-0 flex items-end justify-center overflow-hidden select-none"
+          style={{ fontSize: '20rem', fontWeight: 900, color: '#1C1E22', letterSpacing: '-0.05em', lineHeight: 1 }}
+        >
+          DS
+        </div>
+
+        <div className="relative mx-auto max-w-6xl px-6 pb-10 pt-16">
+          {/* Top link columns */}
+          <div className="mb-14 grid gap-10 sm:grid-cols-2 md:grid-cols-4">
+            {[
+              { title: 'DigiScheme', links: ['Home', 'All Schemes', 'Privacy Policy', 'Contact'] },
+              { title: 'Features',   links: ['Eligibility Check', 'DigiLocker Verify', 'Apply Guide', 'Link Checker'] },
+              { title: 'For Citizens', links: ['Students', 'Farmers', 'Women', 'Senior Citizens', 'BPL Families'] },
+              { title: 'Resources',  links: ['How it Works', 'FAQ', 'Blog', 'Official Scheme Sites'] },
+            ].map(({ title, links }) => (
+              <div key={title}>
+                <h3 className="mb-4 text-sm font-bold text-white">{title}</h3>
+                <ul className="space-y-2.5">
+                  {links.map((link) => (
+                    <li key={link}>
+                      <a href="#" className="text-sm transition" style={{ color: C.darkText }} onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#fff')} onMouseLeave={(e) => ((e.target as HTMLElement).style.color = C.darkText)}>
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Large callout heading */}
+          <div
+            className="mb-10 border-t pt-10 text-3xl font-bold text-white sm:text-4xl"
+            style={{ borderColor: C.darkBorder, letterSpacing: '-0.03em' }}
+          >
+            Check your eligibility.{' '}
+            <span style={{ color: '#A5B4FC', borderBottom: `2px solid ${C.brand}` }}>Start for free.</span>
+          </div>
+
+          {/* Bottom bar */}
+          <div
+            className="flex flex-wrap items-center justify-between gap-4 border-t pt-6 text-xs"
+            style={{ borderColor: C.darkBorder, color: C.darkText }}
+          >
+            <span>© 2026 DigiScheme · Made in India 🇮🇳</span>
+            <div className="flex gap-5">
+              {['Legal Notice', 'Privacy Policy', 'Cookies'].map((item) => (
+                <a key={item} href="#" className="transition hover:text-white">{item}</a>
+              ))}
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );
