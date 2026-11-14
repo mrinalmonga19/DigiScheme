@@ -109,7 +109,14 @@ export function Chat() {
     }
   };
 
-  const startVerify = async () => {
+  const startVerify = async (url?: string) => {
+    if (url) {
+      try {
+        const u = new URL(url);
+        nav(u.pathname + u.search);
+        return;
+      } catch { /* fall back */ }
+    }
     const r = await api.startDigilocker();
     nav(new URL(r.consentUrl).pathname + new URL(r.consentUrl).search);
   };
@@ -120,36 +127,40 @@ export function Chat() {
       <div className="flex flex-col gap-3" role="log" aria-live="off" data-testid="chat-log">
         {(() => {
           const lastUserIndex = msgs.map((m) => m.role).lastIndexOf('user');
-          return msgs.map((m, i) => (
-            <div
-              key={m.id}
-              ref={i === lastUserIndex ? lastUserMsgRef : undefined}
-              className={`scroll-mt-4 flex flex-col gap-2 ${m.role === 'user' ? 'items-end' : 'items-start'}`}
-            >
-              <div className={`max-w-[92%] whitespace-pre-line rounded-2xl px-4 py-3 text-lg leading-relaxed ${m.role === 'user' ? 'bg-brand text-white' : 'border border-slate-200 bg-white'}`} data-testid={`msg-${m.role}`}>
-                {m.text}
-                {m.role === 'assistant' && (
-                  <button
-                    type="button"
-                    onClick={() => void listen(m)}
-                    aria-pressed={speakingId === m.id}
-                    aria-label={speakingId === m.id ? t.ui.listening ?? 'Stop' : t.ui.listen}
-                    className={`mt-2 flex items-center gap-1 text-sm font-semibold underline transition-colors ${speakingId === m.id ? 'text-red-600' : 'text-brand'}`}
-                  >
-                    {speakingId === m.id
-                      ? <><Square className="h-4 w-4" aria-hidden /> {t.ui.listening ?? 'Stop'}</>
-                      : <><Volume2 className="h-4 w-4" aria-hidden /> {t.ui.listen}</>}
-                  </button>
+          return msgs.map((m, i) => {
+            const consentLink = m.ui?.consentUrl ?? m.text.match(/https?:\/\/[^\s<>"'`]+\/consent\/[^\s<>"'`]+/i)?.[0];
+            const textToShow = consentLink ? m.text.replace(consentLink, '').trim() : m.text;
+            return (
+              <div
+                key={m.id}
+                ref={i === lastUserIndex ? lastUserMsgRef : undefined}
+                className={`scroll-mt-4 flex flex-col gap-2 ${m.role === 'user' ? 'items-end' : 'items-start'}`}
+              >
+                <div className={`max-w-[92%] whitespace-pre-line rounded-2xl px-4 py-3 text-lg leading-relaxed ${m.role === 'user' ? 'bg-brand text-white' : 'border border-slate-200 bg-white'}`} data-testid={`msg-${m.role}`}>
+                  {textToShow}
+                  {m.role === 'assistant' && (
+                    <button
+                      type="button"
+                      onClick={() => void listen(m)}
+                      aria-pressed={speakingId === m.id}
+                      aria-label={speakingId === m.id ? t.ui.listening ?? 'Stop' : t.ui.listen}
+                      className={`mt-2 flex items-center gap-1 text-sm font-semibold underline transition-colors ${speakingId === m.id ? 'text-red-600' : 'text-brand'}`}
+                    >
+                      {speakingId === m.id
+                        ? <><Square className="h-4 w-4" aria-hidden /> {t.ui.listening ?? 'Stop'}</>
+                        : <><Volume2 className="h-4 w-4" aria-hidden /> {t.ui.listen}</>}
+                    </button>
+                  )}
+                </div>
+                {m.ui?.linkCheck && <LinkVerdict result={m.ui.linkCheck} />}
+                {m.ui?.results && !lowBandwidth && (!m.ui?.askedField ? m.ui.results.filter((c) => c.badge === 'verified' || c.badge === 'estimated') : (i === msgs.length - 1 ? m.ui.results : [])).slice(0, 3).map((c) => <SchemeCard key={c.slug} card={c} onApply={(slug) => void run(() => api.chat({ structured: { type: 'action', action: 'apply', slug } }), t.bot.btnApply)} />)}
+                {consentLink && <button type="button" className="btn-accent" onClick={() => void startVerify(consentLink)}>{t.bot.btnVerify}</button>}
+                {m.ui?.guide?.done && (
+                  <a className="btn-accent" href={`/api/applications/${m.ui.guide.applicationId}/kit.pdf`} download><Download className="h-5 w-5" aria-hidden /> {t.ui.downloadKit}</a>
                 )}
               </div>
-              {m.ui?.linkCheck && <LinkVerdict result={m.ui.linkCheck} />}
-              {m.ui?.results && !lowBandwidth && (!m.ui?.askedField ? m.ui.results.filter((c) => c.badge === 'verified' || c.badge === 'estimated') : (i === msgs.length - 1 ? m.ui.results : [])).slice(0, 3).map((c) => <SchemeCard key={c.slug} card={c} onApply={(slug) => void run(() => api.chat({ structured: { type: 'action', action: 'apply', slug } }), t.bot.btnApply)} />)}
-              {m.ui?.consentUrl && <button type="button" className="btn-accent" onClick={() => void startVerify()}>{t.bot.btnVerify}</button>}
-              {m.ui?.guide?.done && (
-                <a className="btn-accent" href={`/api/applications/${m.ui.guide.applicationId}/kit.pdf`} download><Download className="h-5 w-5" aria-hidden /> {t.ui.downloadKit}</a>
-              )}
-            </div>
-          ));
+            );
+          });
         })()}
         {busy && <p className="text-slate-500" role="status">…</p>}
         <div ref={endRef} />

@@ -113,6 +113,16 @@ describe('chat flow (mock LLM)', () => {
     expect(hist.body.state).toBe('application');
     expect(hist.body.messages.length).toBe(8);
   });
+
+  it('handles connect digilocker command without removing the consent link', async () => {
+    const { agent } = await signedIn(h, 'en');
+    await agent.post('/api/chat').send({ text: 'delhi' });
+    const res = await agent.post('/api/chat').send({ text: 'Connect DigiLocker' });
+    expect(res.status).toBe(200);
+    expect(res.body.replyText).not.toContain('link removed');
+    expect(res.body.replyText).toContain('/consent/');
+    expect(res.body.ui.consentUrl).toContain('/consent/');
+  });
 });
 
 describe('orchestrator guards', () => {

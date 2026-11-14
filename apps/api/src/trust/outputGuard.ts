@@ -5,6 +5,7 @@
  *   3. banned claims   - promises the assistant must never make are removed.
  */
 import { pack } from '@digischeme/shared';
+import { env } from '../config/env';
 import { extractUrls } from './extract';
 import { scrubPii } from './pii';
 import { checkUrl } from './whitelist';
@@ -14,6 +15,21 @@ export interface GuardReport {
   removedLinks: string[];
   piiMasked: string[];
   bannedClaims: string[];
+}
+
+function isAllowedAppUrl(urlStr: string): boolean {
+  try {
+    const parsed = new URL(urlStr);
+    if (!parsed.pathname.startsWith('/consent')) return false;
+    const allowedHosts = new Set(['localhost', '127.0.0.1']);
+    try {
+      if (env.WEB_BASE_URL) allowedHosts.add(new URL(env.WEB_BASE_URL).hostname);
+      if (env.PUBLIC_BASE_URL) allowedHosts.add(new URL(env.PUBLIC_BASE_URL).hostname);
+    } catch { /* ignore */ }
+    return allowedHosts.has(parsed.hostname);
+  } catch {
+    return false;
+  }
 }
 
 const BANNED: Array<{ id: string; re: RegExp }> = [
@@ -31,7 +47,7 @@ export function guardOutput(text: string, lang: string): GuardReport {
   // 1. Links. Replace from the end so earlier indices stay valid.
   let out = text;
   for (const u of extractUrls(text).reverse()) {
-    if (checkUrl(u.normalised).official) continue;
+    if (checkUrl(u.normalised).official || isAllowedAppUrl(u.normalised)) continue;
     removedLinks.push(u.raw);
     out = out.slice(0, u.index) + p.bot.removedLink + out.slice(u.index + u.raw.length);
   }
