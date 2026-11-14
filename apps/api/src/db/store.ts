@@ -3,7 +3,7 @@
  * (DB_MODE=mongo) and an in-memory one (DB_MODE=memory) so the whole app runs offline and in CI.
  */
 import type {
-  DocumentType, FieldSource, Profile, Scheme, SessionState, TrackerStatus, DocumentCode,
+  DocumentType, FieldSource, Profile, Scheme, SessionState, TrackerStatus, DocumentCode, ChatUiHints,
 } from '@digischeme/shared';
 
 export interface BaseDoc {
@@ -77,6 +77,7 @@ export interface SessionMessage {
   language: string;
   timestamp: string;
   toolCalls: string[];
+  ui?: ChatUiHints;
 }
 
 export interface SessionDoc extends BaseDoc {

@@ -30,6 +30,16 @@ export default function Consent() {
     try {
       const r = await api.decide(id, state, yes ? Object.keys(allow).filter((k) => allow[k]) : [], persona);
       setDone(r.status);
+      if (r.status === 'granted') {
+        // Fire-and-forget: run eligibility with the newly verified data so results appear in chat
+        try {
+          await api.chat({
+            structured: { type: 'action', action: 'results' },
+            language,
+            userLabel: '✅ DigiLocker connected',
+          } as Parameters<typeof api.chat>[0]);
+        } catch { /* non-fatal – user can still see results by tapping Results chip */ }
+      }
       setTimeout(() => nav('/chat'), 1600);
     } catch (e) { setError(e instanceof ApiError ? e.message : t.bot.errorFallback); }
   };

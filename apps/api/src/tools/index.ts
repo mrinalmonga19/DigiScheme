@@ -163,7 +163,7 @@ async function runElig(deps: ToolDeps, ctx: ToolContext, args: z.infer<typeof sc
   if (next) ctx.ui.askedField = next;
   ctx.session.lastResultSlugs = cards.filter((c) => isEligible(c.status)).map((c) => c.slug);
   ctx.session.lastAskedField = next;
-  if (ctx.session.state === 'discovery' && cards.length > 0) ctx.session.state = 'results';
+  if ((ctx.session.state === 'discovery' || ctx.session.state === 'verification') && cards.length > 0) ctx.session.state = 'results';
   for (const c of cards.slice(0, 5)) {
     const r = results.find((x) => x.slug === c.slug)!;
     await deps.audit.log({ userId: ctx.user._id, eventType: 'eligibility_run', toolName: 'run_eligibility', schemeSlug: c.slug, ruleVersion: r.ruleVersion, result: r.status });

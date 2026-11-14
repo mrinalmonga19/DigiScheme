@@ -47,7 +47,7 @@ export function Chat() {
         isFirstMount.current = false;
         if (!active) return;
         if (h.messages.length > 0) {
-          setMsgs(h.messages.map((m) => ({ id: ++id.current, role: m.role, text: m.text })));
+          setMsgs(h.messages.map((m) => ({ id: ++id.current, role: m.role, text: m.text, ui: m.ui })));
           setChips(h.suggestedReplies as SuggestedReply[]);
           setCompleteness(h.profileCompleteness);
         } else {

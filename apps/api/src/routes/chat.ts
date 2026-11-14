@@ -38,7 +38,7 @@ export function chatRoutes(app: AppContext): Router {
     const s = await app.chat.session(user(req)._id);
     const profile = await app.profiles.get(user(req)._id);
     res.json({
-      messages: s.messages.map((m) => ({ role: m.role, text: m.text, language: m.language, timestamp: m.timestamp })),
+      messages: s.messages.map((m) => ({ role: m.role, text: m.text, language: m.language, timestamp: m.timestamp, ...(m.ui ? { ui: m.ui } : {}) })),
       state: s.state, suggestedReplies: s.lastSuggested, profileCompleteness: profileCompleteness(profile),
     });
   });
@@ -46,10 +46,12 @@ export function chatRoutes(app: AppContext): Router {
   r.post('/chat', chatLimiter, async (req, res) => {
     const body = z.object({
       text: z.string().max(2000).optional(), structured: structuredSchema.optional(), language: langSchema.optional(), wantAudio: z.boolean().optional(),
+      userLabel: z.string().max(100).optional(),
     }).refine((b) => (b.text && b.text.trim().length > 0) || b.structured, 'Send some text or a structured action').parse(req.body);
     const out = await app.chat.handle({
       user: user(req), ...(body.text ? { text: body.text } : {}), ...(body.structured ? { structured: body.structured } : {}),
       ...(body.language ? { language: body.language } : {}), wantAudio: body.wantAudio ?? false,
+      ...(body.userLabel ? { userLabel: body.userLabel } : {}),
     });
     res.json(publicResult(out));
   });

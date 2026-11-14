@@ -1,4 +1,4 @@
-import type { ChatResponse, DemoModeFlags, GuideStepView, LinkCheckResult, SchemeCardView, StructuredInput } from '@digischeme/shared';
+import type { ChatResponse, ChatUiHints, DemoModeFlags, GuideStepView, LinkCheckResult, SchemeCardView, StructuredInput } from '@digischeme/shared';
 
 export class ApiError extends Error {
   constructor(public readonly status: number, public readonly code: string, message: string) {
@@ -72,8 +72,8 @@ export const api = {
   settings: (b: { language?: string; lowBandwidth?: boolean }) => req<SessionInfo>('PATCH', '/me/settings', b),
   deleteMe: () => req<{ deleted: boolean }>('DELETE', '/me'),
   welcome: (language?: string) => get<{ text: string }>(`/chat/welcome${language ? `?language=${language}` : ''}`),
-  history: () => get<{ messages: Array<{ role: 'user' | 'assistant'; text: string; language: string; timestamp: string }>; state: string; suggestedReplies: Array<{ label: string; structured?: StructuredInput }>; profileCompleteness: number }>('/chat/history'),
-  chat: (b: { text?: string; structured?: StructuredInput; language?: string; wantAudio?: boolean }) => post<ChatReply>('/chat', b),
+  history: () => get<{ messages: Array<{ role: 'user' | 'assistant'; text: string; language: string; timestamp: string; ui?: ChatUiHints }>; state: string; suggestedReplies: Array<{ label: string; structured?: StructuredInput }>; profileCompleteness: number }>('/chat/history'),
+  chat: (b: { text?: string; structured?: StructuredInput; language?: string; wantAudio?: boolean; userLabel?: string }) => post<ChatReply>('/chat', b),
   voiceChat: (blob: Blob, language?: string) => {
     const f = new FormData();
     f.append('audio', blob, 'voice.webm');

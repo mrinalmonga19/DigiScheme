@@ -26,6 +26,7 @@ export interface ChatInput {
   wantAudio?: boolean;
   /** Explicit language for this turn (language switcher). Locks the user's choice. */
   language?: string;
+  userLabel?: string;
 }
 
 export interface ChatResult extends ChatResponse {
@@ -165,10 +166,10 @@ export class ChatService {
 
     // ---- 7. Persist (scrubbed text only) ----
     const now = new Date().toISOString();
-    const userLine = input.structured ? chipLabel(input.structured, suggestedReplies, session) : scrub.text;
+    const userLine = input.userLabel ?? (input.structured ? chipLabel(input.structured, suggestedReplies, session) : scrub.text);
     session.messages.push(
       { role: 'user', text: userLine, language: lang, timestamp: now, toolCalls: [] },
-      { role: 'assistant', text: reply, language: lang, timestamp: now, toolCalls: out.toolsCalled },
+      { role: 'assistant', text: reply, language: lang, timestamp: now, toolCalls: out.toolsCalled, ui: hints },
     );
     if (session.messages.length > 40) session.messages = session.messages.slice(-40);
     session.greeted = true;
