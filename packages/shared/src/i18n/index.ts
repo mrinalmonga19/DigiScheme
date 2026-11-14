@@ -1,4 +1,4 @@
-import { en, type LanguagePack } from './en';
+import { en, type LanguagePack as LanguagePackDef } from './en';
 import { hi } from './hi';
 import { pa } from './pa';
 import { ta } from './ta';
@@ -8,13 +8,15 @@ import { mr } from './mr';
 import { te } from './te';
 import { gu } from './gu';
 
-export type { LanguagePack };
+export type LanguagePack = LanguagePackDef & { landing: typeof en.landing };
 
-export const PACKS: Record<string, LanguagePack> = { en, hi, pa, ta, kn, bn, mr, te, gu };
+export const PACKS: Record<string, LanguagePackDef> = { en, hi, pa, ta, kn, bn, mr, te, gu };
 
 /** Language pack for a code, falling back to English for languages without a pack yet. */
 export function pack(lang: string): LanguagePack {
-  return PACKS[lang] ?? en;
+  const p = PACKS[lang] ?? en;
+  const landing = p.landing ? { ...en.landing, ...p.landing } : en.landing;
+  return { ...p, landing };
 }
 
 /** Fill `{name}` placeholders. Unknown placeholders are left as-is so gaps are visible in review. */

@@ -1,10 +1,11 @@
 /**
  * Landing page — MIA-inspired design system
  * Lavender canvas · Dark rounded dark sections · Pill CTAs · FAQ accordion
+ * Full multilingual support with dynamic navbar language dropdown
  */
 import {
-  ArrowUpRight, ChevronDown, ChevronUp, FileText, MessageCircle, SearchCheck,
-  ShieldCheck, Sparkles, Star, UserRoundCheck, Zap,
+  ArrowUpRight, ChevronDown, ChevronUp, FileText, Languages as LanguagesIcon,
+  MessageCircle, SearchCheck, ShieldCheck, Sparkles, Star, UserRoundCheck, Zap,
 } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -247,6 +248,8 @@ export default function Landing() {
   const [error, setError] = useState<string | null>(null);
   const authed = Boolean(session?.authenticated && session.user?.consent.dataProcessing.granted);
 
+  const L = t.landing;
+
   const go = async () => {
     setBusy(true); setError(null);
     try { if (!authed) await start(true); nav('/chat'); }
@@ -255,30 +258,12 @@ export default function Landing() {
   };
 
   const faqs = [
-    {
-      q: 'Is DigiScheme free to use?',
-      a: 'Yes, completely free. DigiScheme is a public interest tool. We never charge citizens to discover schemes they are entitled to.',
-    },
-    {
-      q: 'Do I need to link my Aadhaar?',
-      a: 'No. You can browse and check eligibility without linking Aadhaar. DigiLocker integration is optional and only enhances result accuracy with a Verified badge.',
-    },
-    {
-      q: 'How does DigiScheme know I am eligible?',
-      a: 'Our eligibility engine applies official rules (income bands, caste categories, state residency, age limits) published by each scheme. You answer a few questions; we match instantly across 300+ schemes.',
-    },
-    {
-      q: 'Is my personal data safe?',
-      a: 'All data is encrypted in transit and at rest. We never sell data or share it with third parties. You can delete your profile from Settings at any time.',
-    },
-    {
-      q: 'How many languages are supported?',
-      a: 'Nine languages today: English, Hindi, Punjabi, Tamil, Kannada, Bengali, Marathi, Telugu, and Gujarati. The AI understands mixed-language (Hinglish) messages too.',
-    },
-    {
-      q: 'Can I apply for schemes directly through DigiScheme?',
-      a: 'DigiScheme provides official application links and step-by-step guidance. Final submission always goes to the government portal — we never intermediate your application.',
-    },
+    { q: L.faq1Q, a: L.faq1A },
+    { q: L.faq2Q, a: L.faq2A },
+    { q: L.faq3Q, a: L.faq3A },
+    { q: L.faq4Q, a: L.faq4A },
+    { q: L.faq5Q, a: L.faq5A },
+    { q: L.faq6Q, a: L.faq6A },
   ];
 
   /* ── render ───────────────────────────────────────────────────── */
@@ -305,9 +290,9 @@ export default function Landing() {
           {/* Nav links */}
           <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
             {[
-              ['#features', 'Features'],
-              ['#howitworks', 'How it works'],
-              ['#languages', 'Languages'],
+              ['#features', L.navFeatures],
+              ['#howitworks', L.navHowItWorks],
+              ['#languages', L.navLanguages],
             ].map(([href, label]) => (
               <a
                 key={href}
@@ -325,19 +310,38 @@ export default function Landing() {
               className="rounded-full px-4 py-1.5 text-sm font-semibold transition"
               style={{ background: C.brandLt, color: C.brand }}
             >
-              9 Languages
+              {languages.length} {L.navLanguages}
             </a>
           </nav>
 
-          {/* Right CTAs */}
+          {/* Right Controls: Language Selector Dropdown + CTAs */}
           <div className="flex items-center gap-3">
+            {/* Dynamic Navbar Language Dropdown */}
+            <label className="flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-semibold transition hover:border-brand/40"
+              style={{ borderColor: C.border, background: '#FFFFFF', color: '#111215' }}>
+              <LanguagesIcon className="h-4 w-4 shrink-0" style={{ color: C.brand }} aria-hidden />
+              <select
+                aria-label={L.navSelectLanguage}
+                value={language}
+                onChange={(e) => void setLanguage(e.target.value)}
+                className="cursor-pointer bg-transparent text-sm font-semibold outline-none"
+                style={{ color: '#111215' }}
+              >
+                {languages.map((l) => (
+                  <option key={l.code} value={l.code} lang={l.code}>
+                    {l.native}
+                  </option>
+                ))}
+              </select>
+            </label>
+
             {session?.authenticated && (
-              <button type="button" onClick={() => nav('/chat')} className="text-sm font-bold" style={{ color: C.brand }}>
-                Open App
+              <button type="button" onClick={() => nav('/chat')} className="hidden text-sm font-bold sm:inline-block" style={{ color: C.brand }}>
+                {L.navOpenApp}
               </button>
             )}
             <PillCTA onClick={() => void go()} disabled={busy} testId="start-nav">
-              {authed ? 'Go to Chat' : 'Start for Free'}
+              {authed ? L.navGoToChat : L.navStartFree}
             </PillCTA>
           </div>
         </div>
@@ -360,7 +364,7 @@ export default function Landing() {
             style={{ background: '#FFFFFF', borderColor: C.border, color: C.brand }}
           >
             <Sparkles className="h-4 w-4" aria-hidden style={{ color: '#F59E0B' }} />
-            Direct citizen benefit · 100% privacy protected 🇮🇳
+            {L.heroBadge}
           </div>
 
           {/* Hero headline */}
@@ -368,32 +372,31 @@ export default function Landing() {
             className="text-5xl font-bold leading-tight sm:text-6xl md:text-7xl"
             style={{ color: '#111215', letterSpacing: '-0.03em', lineHeight: 1.1 }}
           >
-            Government schemes,{' '}
-            <span style={{ color: C.brand }}>found and verified.</span>
+            {L.heroHeadline1}{' '}
+            <span style={{ color: C.brand }}>{L.heroHeadline2}</span>
           </h1>
 
           <p
             className="mx-auto mt-6 max-w-xl text-lg leading-relaxed"
             style={{ color: C.muted }}
           >
-            DigiScheme unifies central and state schemes, DigiLocker verification, and multilingual AI assistance
-            in one sovereign platform. No forced Aadhaar — you decide what to share.
+            {L.heroSub}
           </p>
 
           {/* Trust badges */}
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <TrustBadge stars label="4.9 / 5.0 · Citizen Reviews" />
-            <TrustBadge stars label="DigiLocker Integrated" />
-            <TrustBadge label="300+ Schemes · Free" />
+            <TrustBadge stars label={L.heroBadge1} />
+            <TrustBadge stars label={L.heroBadge2} />
+            <TrustBadge label={L.heroBadge3} />
           </div>
 
           {/* CTA row */}
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <PillCTA onClick={() => void go()} disabled={busy} testId="start-hero">
-              {authed ? 'Open DigiScheme' : 'Check Your Eligibility'}
+              {authed ? L.heroCtaAuth : L.heroCta}
             </PillCTA>
             <PillCTA secondary onClick={() => document.getElementById('howitworks')?.scrollIntoView({ behavior: 'smooth' })}>
-              See how it works
+              {L.heroCtaSecondary}
             </PillCTA>
           </div>
         </div>
@@ -402,10 +405,10 @@ export default function Landing() {
       {/* ══ MARQUEE — trusted by ══════════════════════════════════ */}
       <section className="border-y px-6 py-10" style={{ background: C.canvas, borderColor: C.border }}>
         <p className="mb-5 text-center text-xs font-semibold uppercase tracking-widest" style={{ color: C.muted }}>
-          Trusted by citizens across India
+          {L.marqueeTitle}
         </p>
         <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
-          {['Delhi', 'Punjab', 'Tamil Nadu', 'Maharashtra', 'Karnataka', 'West Bengal', 'Gujarat'].map((state) => (
+          {['Delhi', 'Punjab', 'Tamil Nadu', 'Maharashtra', 'Karnataka', 'West Bengal', 'Gujarat', 'Uttar Pradesh', 'Rajasthan'].map((state) => (
             <span key={state} className="text-base font-bold text-slate-500">{state}</span>
           ))}
         </div>
@@ -427,7 +430,7 @@ export default function Landing() {
           {/* Header */}
           <div className="mb-14 text-center">
             <div className="mb-5 flex flex-wrap justify-center gap-2">
-              {['Schemes', 'Verification', 'Multilingual', 'Privacy'].map((tag) => (
+              {[L.pillarsTag1, L.pillarsTag2, L.pillarsTag3, L.pillarsTag4].map((tag) => (
                 <span
                   key={tag}
                   className="rounded-full px-4 py-1.5 text-sm font-semibold"
@@ -441,14 +444,14 @@ export default function Landing() {
               className="mx-auto max-w-2xl text-4xl font-bold sm:text-5xl"
               style={{ color: '#A5B4FC', letterSpacing: '-0.03em', lineHeight: 1.15 }}
             >
-              One platform, every scheme you deserve.
+              {L.pillarsHeadline}
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-lg" style={{ color: C.darkText }}>
-              Your profile,{' '}
+              {L.pillarsSub1}{' '}
               <span className="rounded-full px-3 py-0.5 text-sm font-bold" style={{ background: 'rgba(249,115,22,0.2)', color: '#FB923C' }}>
-                verified
+                {L.pillarsSub2}
               </span>
-              {' '}documents, and eligibility — in one sovereign platform.
+              {' '}{L.pillarsSub3}
             </p>
           </div>
 
@@ -457,10 +460,10 @@ export default function Landing() {
             <div>
               <ul className="space-y-5">
                 {[
-                  ['🎯', 'Instant eligibility across 300+ central & state schemes'],
-                  ['🛡️', 'DigiLocker-verified results with official "Verified" badge'],
-                  ['🗣️', 'AI assistant in Hindi, Tamil, Bengali and 6 more languages'],
-                  ['📋', 'Step-by-step apply guides with downloadable document kit'],
+                  ['🎯', L.pillarsBullet1],
+                  ['🛡️', L.pillarsBullet2],
+                  ['🗣️', L.pillarsBullet3],
+                  ['📋', L.pillarsBullet4],
                 ].map(([icon, text]) => (
                   <li key={text} className="flex items-start gap-4">
                     <span className="text-2xl">{icon}</span>
@@ -470,7 +473,7 @@ export default function Landing() {
               </ul>
               <div className="mt-8">
                 <PillCTA onClick={() => void go()} disabled={busy}>
-                  {authed ? 'Open App' : 'Start Free Check'}
+                  {authed ? L.pillarsCtaAuth : L.pillarsCta}
                 </PillCTA>
               </div>
             </div>
@@ -483,26 +486,26 @@ export default function Landing() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <PillarCard
               icon={SearchCheck}
-              title="Eligibility Engine"
-              desc="Rules for 300+ central and state schemes matched to your profile instantly. Income, caste, state, age, occupation."
+              title={L.p1Title}
+              desc={L.p1Desc}
               accentColor="#4338CA"
             />
             <PillarCard
               icon={ShieldCheck}
-              title="DigiLocker Verified"
-              desc="Connect once — get a Verified badge across all matching schemes. Your data, your consent, always revocable."
+              title={L.p2Title}
+              desc={L.p2Desc}
               accentColor="#0D9488"
             />
             <PillarCard
               icon={MessageCircle}
-              title="9 Languages"
-              desc="Ask questions in Hindi, Tamil, Bengali, Gujarati and 5 more. The AI understands Hinglish too."
+              title={L.p3Title}
+              desc={L.p3Desc}
               accentColor="#F97316"
             />
             <PillarCard
               icon={FileText}
-              title="Apply Guides"
-              desc="Step-by-step walkthroughs with document checklists and a downloadable PDF application kit."
+              title={L.p4Title}
+              desc={L.p4Desc}
               accentColor="#8B5CF6"
             />
           </div>
@@ -517,38 +520,36 @@ export default function Landing() {
             <div>
               <div className="mb-4 flex items-center gap-2">
                 <Zap className="h-5 w-5" style={{ color: C.brand }} aria-hidden />
-                <TagPill label="Simple 3-step process" />
+                <TagPill label={L.howTag} />
               </div>
               <h2
                 className="text-4xl font-bold sm:text-5xl"
                 style={{ color: '#111215', letterSpacing: '-0.03em', lineHeight: 1.15 }}
               >
-                No forced linking.
-                You choose the source of truth.
+                {L.howHeadline}
               </h2>
             </div>
             <p className="text-lg leading-relaxed" style={{ color: C.muted }}>
-              Unlike apps that demand Aadhaar upfront, DigiScheme lets you browse anonymously.
-              Connect DigiLocker when you want verified results — on your terms.
+              {L.howSub}
             </p>
           </div>
 
           {/* 01 / 02 / 03 cards */}
           <div className="grid gap-5 md:grid-cols-3">
             <StepCard
-              num="01"
-              title="Zero data lock-in"
-              desc="Browse and check eligibility anonymously. Answer 4 quick questions — state, income, education, category — in your language."
+              num={L.s1Num}
+              title={L.s1Title}
+              desc={L.s1Desc}
             />
             <StepCard
-              num="02"
-              title="Smart cascading match"
-              desc="Our rules engine checks your profile against every central and state scheme instantly, showing Eligible or Needs Info results."
+              num={L.s2Num}
+              title={L.s2Title}
+              desc={L.s2Desc}
             />
             <StepCard
-              num="03"
-              title="Sovereign & encrypted"
-              desc="Optionally connect DigiLocker for verified results. Your documents never leave the app without your explicit consent."
+              num={L.s3Num}
+              title={L.s3Title}
+              desc={L.s3Desc}
             />
           </div>
 
@@ -557,10 +558,10 @@ export default function Landing() {
             className="mt-14 grid grid-cols-2 gap-8 rounded-3xl p-10 md:grid-cols-4"
             style={{ background: C.canvas, border: `1px solid ${C.border}` }}
           >
-            <StatBlock value="300+" label="Schemes covered" />
-            <StatBlock value="9"    label="Indian languages" />
-            <StatBlock value="100%" label="Free to use" />
-            <StatBlock value="0"    label="Data ever sold" />
+            <StatBlock value={L.stat1Val} label={L.stat1Label} />
+            <StatBlock value={L.stat2Val} label={L.stat2Label} />
+            <StatBlock value={L.stat3Val} label={L.stat3Label} />
+            <StatBlock value={L.stat4Val} label={L.stat4Label} />
           </div>
         </div>
       </section>
@@ -569,15 +570,15 @@ export default function Landing() {
       <section id="languages" className="px-6 py-24" style={{ background: C.canvas }}>
         <div className="mx-auto max-w-xl">
           <div className="mb-10 text-center">
-            <TagPill label="Choose your language" />
+            <TagPill label={L.langTag} />
             <h2
               className="mt-4 text-3xl font-bold"
               style={{ color: '#111215', letterSpacing: '-0.02em' }}
             >
-              DigiScheme speaks your mother tongue
+              {L.langHeadline}
             </h2>
             <p className="mt-3 text-base" style={{ color: C.muted }}>
-              Switch any time. The AI adapts to whichever language you type in.
+              {L.langSub}
             </p>
           </div>
 
@@ -661,17 +662,17 @@ export default function Landing() {
                 className="text-4xl font-bold sm:text-5xl"
                 style={{ color: '#111215', letterSpacing: '-0.03em', lineHeight: 1.1 }}
               >
-                All about{' '}
+                {L.faqHeadline1}{' '}
                 <span style={{ color: C.brand, borderBottom: `3px solid ${C.brand}` }}>
-                  DigiScheme
+                  {L.faqHeadline2}
                 </span>
               </h2>
               <p className="mt-6 text-base" style={{ color: C.muted }}>
-                Everything you need to know before you start checking your eligibility.
+                {L.faqSub}
               </p>
               <div className="mt-8">
                 <PillCTA onClick={() => void go()} disabled={busy}>
-                  {authed ? 'Open App' : 'Get Started Free'}
+                  {authed ? L.faqCtaAuth : L.faqCta}
                 </PillCTA>
               </div>
             </div>
@@ -704,18 +705,18 @@ export default function Landing() {
 
             <div className="relative">
               <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-sm font-semibold text-white">
-                <UserRoundCheck className="h-4 w-4" aria-hidden /> Free for all citizens
+                <UserRoundCheck className="h-4 w-4" aria-hidden /> {L.ctaBadge}
               </span>
               <h2
                 className="mx-auto max-w-xl text-3xl font-bold text-white sm:text-4xl"
                 style={{ letterSpacing: '-0.03em', lineHeight: 1.15 }}
               >
-                Try{' '}
+                {L.ctaHeadline1}{' '}
                 <span className="rounded-xl bg-white/20 px-3">DigiScheme</span>
-                {' '}for your family.
+                {' '}{L.ctaHeadline2}
               </h2>
               <p className="mx-auto mt-4 max-w-md text-indigo-200">
-                One profile, the whole family's schemes. Central pension, scholarships, housing — all found in minutes.
+                {L.ctaSub}
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-4">
                 <button
@@ -725,7 +726,7 @@ export default function Landing() {
                   className="group inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-base font-bold transition hover:bg-indigo-50 disabled:opacity-50"
                   style={{ color: C.brand }}
                 >
-                  Start the Free Check
+                  {L.ctaBtn}
                   <span
                     className="flex h-8 w-8 items-center justify-center rounded-full text-white transition group-hover:scale-105"
                     style={{ background: C.brand }}
@@ -744,10 +745,10 @@ export default function Landing() {
         <div className="mx-auto max-w-4xl">
           <div className="flex flex-wrap justify-center gap-8 text-sm" style={{ color: C.muted }}>
             {[
-              { icon: ShieldCheck, text: 'No Aadhaar stored' },
-              { icon: SearchCheck, text: 'DigiLocker official integration' },
-              { icon: UserRoundCheck, text: 'You own your data' },
-              { icon: Sparkles,    text: 'AI-powered, human-reviewed rules' },
+              { icon: ShieldCheck, text: L.trust1 },
+              { icon: SearchCheck, text: L.trust2 },
+              { icon: UserRoundCheck, text: L.trust3 },
+              { icon: Sparkles,    text: L.trust4 },
             ].map(({ icon: Icon, text }) => (
               <div key={text} className="flex items-center gap-2">
                 <Icon className="h-4 w-4" style={{ color: '#10B981' }} aria-hidden />
@@ -781,10 +782,10 @@ export default function Landing() {
           {/* Top link columns */}
           <div className="mb-14 grid gap-10 sm:grid-cols-2 md:grid-cols-4">
             {[
-              { title: 'DigiScheme', links: ['Home', 'All Schemes', 'Privacy Policy', 'Contact'] },
-              { title: 'Features',   links: ['Eligibility Check', 'DigiLocker Verify', 'Apply Guide', 'Link Checker'] },
-              { title: 'For Citizens', links: ['Students', 'Farmers', 'Women', 'Senior Citizens', 'BPL Families'] },
-              { title: 'Resources',  links: ['How it Works', 'FAQ', 'Blog', 'Official Scheme Sites'] },
+              { title: L.footerColHome, links: [L.footerLink1, L.footerLink2, L.footerLink3, L.footerLink4] },
+              { title: L.footerColFeatures, links: [L.footerLink5, L.footerLink6, L.footerLink7, L.footerLink8] },
+              { title: L.footerColCitizens, links: [L.footerLink9, L.footerLink10, L.footerLink11, L.footerLink12, L.footerLink13] },
+              { title: L.footerColResources, links: [L.footerLink14, L.footerLink15, L.footerLink16, L.footerLink17] },
             ].map(({ title, links }) => (
               <div key={title}>
                 <h3 className="mb-4 text-sm font-bold text-white">{title}</h3>
@@ -806,8 +807,8 @@ export default function Landing() {
             className="mb-10 border-t pt-10 text-3xl font-bold text-white sm:text-4xl"
             style={{ borderColor: C.darkBorder, letterSpacing: '-0.03em' }}
           >
-            Check your eligibility.{' '}
-            <span style={{ color: '#A5B4FC', borderBottom: `2px solid ${C.brand}` }}>Start for free.</span>
+            {L.footerCallout1}{' '}
+            <span style={{ color: '#A5B4FC', borderBottom: `2px solid ${C.brand}` }}>{L.footerCallout2}</span>
           </div>
 
           {/* Bottom bar */}
@@ -815,9 +816,9 @@ export default function Landing() {
             className="flex flex-wrap items-center justify-between gap-4 border-t pt-6 text-xs"
             style={{ borderColor: C.darkBorder, color: C.darkText }}
           >
-            <span>© 2026 DigiScheme · Made in India 🇮🇳</span>
+            <span>{L.footerCopyright}</span>
             <div className="flex gap-5">
-              {['Legal Notice', 'Privacy Policy', 'Cookies'].map((item) => (
+              {[L.footerLegal, L.footerPrivacy, L.footerCookies].map((item) => (
                 <a key={item} href="#" className="transition hover:text-white">{item}</a>
               ))}
             </div>

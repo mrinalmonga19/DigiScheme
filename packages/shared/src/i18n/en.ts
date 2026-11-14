@@ -159,6 +159,111 @@ export const en = {
     reminder: 'Reminder: {scheme} application.',
   },
 
+  landing: {
+    // Navbar
+    navFeatures: 'Features',
+    navHowItWorks: 'How it works',
+    navLanguages: 'Languages',
+    navOpenApp: 'Open App',
+    navStartFree: 'Start for Free',
+    navGoToChat: 'Go to Chat',
+    navSelectLanguage: 'Select language',
+    // Hero
+    heroBadge: 'Direct citizen benefit · 100% privacy protected 🇮🇳',
+    heroHeadline1: 'Government schemes,',
+    heroHeadline2: 'found and verified.',
+    heroSub: 'DigiScheme unifies central and state schemes, DigiLocker verification, and multilingual AI assistance in one sovereign platform. No forced Aadhaar — you decide what to share.',
+    heroBadge1: '4.9 / 5.0 · Citizen Reviews',
+    heroBadge2: 'DigiLocker Integrated',
+    heroBadge3: '300+ Schemes · Free',
+    heroCta: 'Check Your Eligibility',
+    heroCtaAuth: 'Open DigiScheme',
+    heroCtaSecondary: 'See how it works',
+    // Marquee
+    marqueeTitle: 'Trusted by citizens across India',
+    // Dark pillars section
+    pillarsTag1: 'Schemes', pillarsTag2: 'Verification', pillarsTag3: 'Multilingual', pillarsTag4: 'Privacy',
+    pillarsHeadline: 'One platform, every scheme you deserve.',
+    pillarsSub1: 'Your profile,',
+    pillarsSub2: 'verified',
+    pillarsSub3: 'documents, and eligibility — in one sovereign platform.',
+    pillarsBullet1: 'Instant eligibility across 300+ central & state schemes',
+    pillarsBullet2: 'DigiLocker-verified results with official "Verified" badge',
+    pillarsBullet3: 'AI assistant in Hindi, Tamil, Bengali and 6 more languages',
+    pillarsBullet4: 'Step-by-step apply guides with downloadable document kit',
+    pillarsCtaAuth: 'Open App',
+    pillarsCta: 'Start Free Check',
+    // Pillar cards
+    p1Title: 'Eligibility Engine',
+    p1Desc: 'Rules for 300+ central and state schemes matched to your profile instantly. Income, caste, state, age, occupation.',
+    p2Title: 'DigiLocker Verified',
+    p2Desc: 'Connect once — get a Verified badge across all matching schemes. Your data, your consent, always revocable.',
+    p3Title: '9 Languages',
+    p3Desc: 'Ask questions in Hindi, Tamil, Bengali, Gujarati and 5 more. The AI understands Hinglish too.',
+    p4Title: 'Apply Guides',
+    p4Desc: 'Step-by-step walkthroughs with document checklists and a downloadable PDF application kit.',
+    // How it works
+    howTag: 'Simple 3-step process',
+    howHeadline: 'No forced linking. You choose the source of truth.',
+    howSub: 'Unlike apps that demand Aadhaar upfront, DigiScheme lets you browse anonymously. Connect DigiLocker when you want verified results — on your terms.',
+    s1Num: '01', s1Title: 'Zero data lock-in',
+    s1Desc: 'Browse and check eligibility anonymously. Answer 4 quick questions — state, income, education, category — in your language.',
+    s2Num: '02', s2Title: 'Smart cascading match',
+    s2Desc: 'Our rules engine checks your profile against every central and state scheme instantly, showing Eligible or Needs Info results.',
+    s3Num: '03', s3Title: 'Sovereign & encrypted',
+    s3Desc: 'Optionally connect DigiLocker for verified results. Your documents never leave the app without your explicit consent.',
+    stat1Val: '300+', stat1Label: 'Schemes covered',
+    stat2Val: '9',    stat2Label: 'Indian languages',
+    stat3Val: '100%', stat3Label: 'Free to use',
+    stat4Val: '0',    stat4Label: 'Data ever sold',
+    // Language section
+    langTag: 'Choose your language',
+    langHeadline: 'DigiScheme speaks your mother tongue',
+    langSub: 'Switch any time. The AI adapts to whichever language you type in.',
+    // FAQ
+    faqHeadline1: 'All about',
+    faqHeadline2: 'DigiScheme',
+    faqSub: 'Everything you need to know before you start checking your eligibility.',
+    faqCtaAuth: 'Open App',
+    faqCta: 'Get Started Free',
+    faq1Q: 'Is DigiScheme free to use?',
+    faq1A: 'Yes, completely free. DigiScheme is a public interest tool. We never charge citizens to discover schemes they are entitled to.',
+    faq2Q: 'Do I need to link my Aadhaar?',
+    faq2A: 'No. You can browse and check eligibility without linking Aadhaar. DigiLocker integration is optional and only enhances result accuracy with a Verified badge.',
+    faq3Q: 'How does DigiScheme know I am eligible?',
+    faq3A: 'Our eligibility engine applies official rules (income bands, caste categories, state residency, age limits) published by each scheme. You answer a few questions; we match instantly across 300+ schemes.',
+    faq4Q: 'Is my personal data safe?',
+    faq4A: 'All data is encrypted in transit and at rest. We never sell data or share it with third parties. You can delete your profile from Settings at any time.',
+    faq5Q: 'How many languages are supported?',
+    faq5A: 'Nine languages today: English, Hindi, Punjabi, Tamil, Kannada, Bengali, Marathi, Telugu, and Gujarati. The AI understands mixed-language (Hinglish) messages too.',
+    faq6Q: 'Can I apply for schemes directly through DigiScheme?',
+    faq6A: 'DigiScheme provides official application links and step-by-step guidance. Final submission always goes to the government portal — we never intermediate your application.',
+    // CTA banner
+    ctaBadge: 'Free for all citizens',
+    ctaHeadline1: 'Try',
+    ctaHeadline2: 'for your family.',
+    ctaSub: 'One profile, the whole family\'s schemes. Central pension, scholarships, housing — all found in minutes.',
+    ctaBtn: 'Start the Free Check',
+    // Trust strip
+    trust1: 'No Aadhaar stored',
+    trust2: 'DigiLocker official integration',
+    trust3: 'You own your data',
+    trust4: 'AI-powered, human-reviewed rules',
+    // Footer
+    footerCallout1: 'Check your eligibility.',
+    footerCallout2: 'Start for free.',
+    footerColHome: 'DigiScheme',
+    footerLink1: 'Home', footerLink2: 'All Schemes', footerLink3: 'Privacy Policy', footerLink4: 'Contact',
+    footerColFeatures: 'Features',
+    footerLink5: 'Eligibility Check', footerLink6: 'DigiLocker Verify', footerLink7: 'Apply Guide', footerLink8: 'Link Checker',
+    footerColCitizens: 'For Citizens',
+    footerLink9: 'Students', footerLink10: 'Farmers', footerLink11: 'Women', footerLink12: 'Senior Citizens', footerLink13: 'BPL Families',
+    footerColResources: 'Resources',
+    footerLink14: 'How it Works', footerLink15: 'FAQ', footerLink16: 'Blog', footerLink17: 'Official Scheme Sites',
+    footerCopyright: '© 2026 DigiScheme · Made in India 🇮🇳',
+    footerLegal: 'Legal Notice', footerPrivacy: 'Privacy Policy', footerCookies: 'Cookies',
+  },
+
   ui: {
     tagline: 'Multiple scheduled languages. One assistant that speaks them all.',
     start: 'Start',
@@ -227,4 +332,7 @@ export const en = {
   },
 };
 
-export type LanguagePack = typeof en;
+export type LandingTranslations = typeof en.landing;
+export type LanguagePack = Omit<typeof en, 'landing'> & {
+  landing?: Partial<LandingTranslations>;
+};
