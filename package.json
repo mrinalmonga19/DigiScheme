@@ -1,0 +1,38 @@
+{
+  "name": "digischeme",
+  "private": true,
+  "version": "0.1.0",
+  "description": "DigiScheme - Digital Citizen Assistant: multilingual access to government schemes",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,magenta \"npm run dev -w @digischeme/api\" \"npm run dev -w @digischeme/web\"",
+    "build": "npm run build -w @digischeme/api && npm run build -w @digischeme/web",
+    "start": "npm run start -w @digischeme/api",
+    "seed": "npm run seed -w @digischeme/api",
+    "translate": "npm run translate -w @digischeme/api",
+    "personas": "npm run personas -w @digischeme/api",
+    "test": "npm run test -w @digischeme/api",
+    "test:e2e": "npm run test:e2e -w @digischeme/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "postinstall": "patch-package"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "concurrently": "^10.0.7",
+    "eslint": "^10.15.0",
+    "patch-package": "^8.0.1",
+    "prettier": "^3.10.1",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.72.2",
+    "vitest": "^5.1.0"
+  }
+}

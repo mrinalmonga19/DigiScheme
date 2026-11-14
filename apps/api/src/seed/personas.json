@@ -1,0 +1,159 @@
+[
+  {
+    "id": "lakshmi",
+    "name": "Lakshmi (demo persona)",
+    "summary": "58, daily-wage farm worker, Tamil Nadu, Tamil speaker. WhatsApp voice notes.",
+    "language": "ta",
+    "channel": "whatsapp",
+    "phone": "+910000000001",
+    "ekyc": { "demoCode": "111111", "name": "Lakshmi K (demo)", "yearOfBirth": 1968, "gender": "female", "state": "Tamil Nadu" },
+    "digilockerDocuments": [
+      {
+        "code": "domicile_certificate", "title": "Residence Certificate", "issuer": "Revenue Department, Tamil Nadu (simulated)",
+        "issuedOn": "2023-06-12", "validUntil": null, "reference": "DEMO-TN-RES-0001", "derived": { "state": "Tamil Nadu" }
+      },
+      {
+        "code": "ration_card", "title": "Family Ration Card", "issuer": "Civil Supplies Department, Tamil Nadu (simulated)",
+        "issuedOn": "2021-02-03", "validUntil": null, "reference": "DEMO-TN-RC-0001", "derived": { "isHeadOfFamily": true }
+      }
+    ],
+    "script": [
+      { "kind": "text", "text": "வணக்கம்", "note": "First contact: language menu, privacy notice and consent" },
+      { "kind": "text", "text": "4", "note": "Chooses Tamil" },
+      { "kind": "voice", "text": "வயதான காலத்தில் எனக்கு ஏதாவது உதவி கிடைக்குமா?", "note": "Voice note: asks about help for old age" },
+      { "kind": "voice", "text": "நான் தமிழ்நாட்டில் இருக்கிறேன். எனக்கு 58 வயது." },
+      { "kind": "voice", "text": "நான் விவசாயக் கூலி வேலை செய்கிறேன்." },
+      { "kind": "voice", "text": "வருடத்திற்கு சுமார் 96,000 ரூபாய் வருமானம்." },
+      { "kind": "voice", "text": "ஆம், வங்கிக் கணக்கு இருக்கிறது.", "note": "Answers the bank account question" },
+      { "kind": "text", "text": "விண்ணப்பிக்க உதவுங்கள்", "note": "Asks for help applying (PMSBY)" },
+      { "kind": "text", "text": "அடுத்து" },
+      { "kind": "text", "text": "அடுத்து" },
+      { "kind": "text", "text": "அடுத்து" },
+      { "kind": "text", "text": "அடுத்து" },
+      { "kind": "text", "text": "அடுத்து" }
+    ],
+    "expect": {
+      "eligible": ["pmsby", "tn-cm-health-insurance"],
+      "notEligible": ["ignoaps", "atal-pension-yojana", "pmjjby"],
+      "guideScheme": "pmsby"
+    }
+  },
+  {
+    "id": "gurpreet",
+    "name": "Gurpreet (demo persona)",
+    "summary": "19, first-year engineering student, Punjab, Punjabi speaker. PWA with mock DigiLocker.",
+    "language": "pa",
+    "channel": "web",
+    "phone": "+910000000002",
+    "ekyc": { "demoCode": "222222", "name": "Gurpreet S (demo)", "yearOfBirth": 2007, "gender": "male", "state": "Punjab" },
+    "digilockerDocuments": [
+      {
+        "code": "income_certificate", "title": "Income Certificate", "issuer": "Revenue Department, Punjab (simulated)",
+        "issuedOn": "2026-07-18", "validUntil": "2027-07-17", "reference": "DEMO-PB-INC-0002", "derived": { "annualFamilyIncome": 210000 }
+      },
+      {
+        "code": "caste_certificate", "title": "Scheduled Caste Certificate", "issuer": "Revenue Department, Punjab (simulated)",
+        "issuedOn": "2022-04-09", "validUntil": null, "reference": "DEMO-PB-SC-0002", "derived": { "category": "SC" }
+      },
+      {
+        "code": "domicile_certificate", "title": "Residence Certificate", "issuer": "Revenue Department, Punjab (simulated)",
+        "issuedOn": "2024-01-22", "validUntil": null, "reference": "DEMO-PB-RES-0002", "derived": { "state": "Punjab" }
+      },
+      {
+        "code": "school_certificate", "title": "Enrolment record: B.Tech Year 1", "issuer": "Academic Bank of Credits (simulated)",
+        "issuedOn": "2026-08-05", "validUntil": null, "reference": "DEMO-ABC-0002", "derived": { "educationLevel": "undergraduate" }
+      }
+    ],
+    "script": [
+      { "kind": "text", "text": "ਮੈਂ ਪੰਜਾਬ ਤੋਂ ਹਾਂ, ਮੇਰੀ ਉਮਰ 19 ਸਾਲ ਹੈ।" },
+      { "kind": "text", "text": "ਮੈਂ ਇੰਜੀਨੀਅਰਿੰਗ ਕਾਲਜ ਦੇ ਪਹਿਲੇ ਸਾਲ ਦਾ ਵਿਦਿਆਰਥੀ ਹਾਂ।" },
+      { "kind": "digilocker", "docs": ["income_certificate", "caste_certificate", "domicile_certificate", "school_certificate"], "note": "Connects mock DigiLocker and allows four documents" },
+      { "kind": "action", "action": "results", "note": "Asks to see schemes: scholarship shows as Verified" },
+      { "kind": "action", "action": "apply", "slug": "post-matric-scholarship-sc" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" }
+    ],
+    "expect": {
+      "verified": ["post-matric-scholarship-sc"],
+      "guideScheme": "post-matric-scholarship-sc"
+    }
+  },
+  {
+    "id": "anita",
+    "name": "Anita (demo persona)",
+    "summary": "31, street vendor, Delhi, Hindi speaker. Pastes a suspicious 'free loan' link.",
+    "language": "hi",
+    "channel": "web",
+    "phone": "+910000000003",
+    "ekyc": { "demoCode": "333333", "name": "Anita D (demo)", "yearOfBirth": 1995, "gender": "female", "state": "Delhi" },
+    "digilockerDocuments": [
+      {
+        "code": "domicile_certificate", "title": "Residence Certificate", "issuer": "Revenue Department, GNCT of Delhi (simulated)",
+        "issuedOn": "2022-11-30", "validUntil": null, "reference": "DEMO-DL-RES-0003", "derived": { "state": "Delhi" }
+      }
+    ],
+    "script": [
+      {
+        "kind": "text",
+        "text": "मुझे यह मैसेज आया है: बधाई हो! आपको 50,000 का फ्री लोन मिला है। आज ही 499 रुपये प्रोसेसिंग फ़ीस देकर यहाँ आवेदन करें http://pm-svanidhi-loan.com/apply",
+        "note": "Pastes a scam message: link checker flags it and points to the real scheme"
+      },
+      { "kind": "text", "text": "मैं दिल्ली में रेहड़ी लगाती हूँ, मेरी उम्र 31 साल है।" },
+      { "kind": "text", "text": "शहर", "note": "Answers the village-or-city question" },
+      { "kind": "action", "action": "apply", "slug": "pm-svanidhi" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "no_document", "note": "Says she does not have the vending certificate step's document" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" }
+    ],
+    "expect": {
+      "linkVerdict": "SUSPICIOUS",
+      "suggestedScheme": "pm-svanidhi",
+      "eligible": ["pm-svanidhi"],
+      "guideScheme": "pm-svanidhi"
+    }
+  },
+  {
+    "id": "ramesh",
+    "name": "Ramesh (demo persona)",
+    "summary": "45, farmer, Karnataka, Kannada speaker. Low-bandwidth mode.",
+    "language": "kn",
+    "channel": "web",
+    "lowBandwidth": true,
+    "phone": "+910000000004",
+    "ekyc": { "demoCode": "444444", "name": "Ramesh G (demo)", "yearOfBirth": 1981, "gender": "male", "state": "Karnataka" },
+    "digilockerDocuments": [
+      {
+        "code": "domicile_certificate", "title": "Residence Certificate", "issuer": "Revenue Department, Karnataka (simulated)",
+        "issuedOn": "2020-09-14", "validUntil": null, "reference": "DEMO-KA-RES-0004", "derived": { "state": "Karnataka" }
+      }
+    ],
+    "script": [
+      { "kind": "text", "text": "ನಾನು ಕರ್ನಾಟಕದ ರೈತ, ನನಗೆ 45 ವರ್ಷ.", "note": "PM-KISAN shows as 'Need more info'; assistant asks for landholding" },
+      { "kind": "text", "text": "2 ಹೆಕ್ಟೇರ್", "note": "Answers the landholding question" },
+      { "kind": "text", "text": "ಇಲ್ಲ", "note": "No income tax payer in the family" },
+      { "kind": "text", "text": "ಇಲ್ಲ", "note": "Not a government employee" },
+      { "kind": "action", "action": "apply", "slug": "pm-kisan" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" },
+      { "kind": "action", "action": "step", "stepAction": "next" }
+    ],
+    "expect": {
+      "needsInfoFirst": "pm-kisan",
+      "firstAskedField": "landholdingHectares",
+      "eligible": ["pm-kisan", "pmfby"],
+      "guideScheme": "pm-kisan"
+    }
+  }
+]

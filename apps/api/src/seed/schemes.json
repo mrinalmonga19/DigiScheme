@@ -1,0 +1,2866 @@
+[
+  {
+    "states": [],
+    "notChecked": [
+      "Institutional landholders are excluded.",
+      "Families of constitutional post holders, ministers, MPs, MLAs and mayors are excluded.",
+      "Registered professionals such as doctors, engineers, lawyers, chartered accountants and architects are excluded.",
+      "Pensioners drawing Rs 10,000 or more a month are excluded (Group D / MTS exempt)."
+    ],
+    "applicationSteps": [
+      {
+        "step": 1,
+        "title": {
+          "en": "Open New Farmer Registration",
+          "kn": "ಹೊಸ ರೈತ ನೋಂದಣಿ ತೆರೆಯಿರಿ"
+        },
+        "officialFieldName": "New Farmer Registration",
+        "instruction": {
+          "en": "On pmkisan.gov.in open \"Farmers Corner\" and choose \"New Farmer Registration\". Pick Rural or Urban farmer.",
+          "kn": "pmkisan.gov.in ನಲ್ಲಿ \"Farmers Corner\" ತೆರೆದು \"New Farmer Registration\" ಆಯ್ಕೆಮಾಡಿ. ಗ್ರಾಮೀಣ ಅಥವಾ ನಗರ ರೈತ ಎಂದು ಆರಿಸಿ."
+        },
+        "prefillFrom": "residence",
+        "commonMistakes": [
+          "Registering on a look-alike website instead of pmkisan.gov.in"
+        ],
+        "documentNeeded": null
+      },
+      {
+        "step": 2,
+        "title": {
+          "en": "Enter Aadhaar and mobile number",
+          "kn": "ಆಧಾರ್ ಮತ್ತು ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ನಮೂದಿಸಿ"
+        },
+        "officialFieldName": "Aadhaar Number / Mobile Number",
+        "instruction": {
+          "en": "Enter your Aadhaar number and Aadhaar-linked mobile number. Type this only on the official website. DigiScheme never asks for it.",
+          "kn": "ನಿಮ್ಮ ಆಧಾರ್ ಸಂಖ್ಯೆ ಮತ್ತು ಆಧಾರ್‌ಗೆ ಜೋಡಿಸಿದ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ಅಧಿಕೃತ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಮಾತ್ರ ನಮೂದಿಸಿ. ಡಿಜಿಸ್ಕೀಮ್ ಇದನ್ನು ಎಂದಿಗೂ ಕೇಳುವುದಿಲ್ಲ."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Mobile number not linked to Aadhaar",
+          "Sharing the OTP with someone else"
+        ],
+        "documentNeeded": "aadhaar"
+      },
+      {
+        "step": 3,
+        "title": {
+          "en": "Select your state",
+          "kn": "ನಿಮ್ಮ ರಾಜ್ಯ ಆಯ್ಕೆಮಾಡಿ"
+        },
+        "officialFieldName": "State",
+        "instruction": {
+          "en": "Choose your state, then district, block and village from the lists.",
+          "kn": "ಪಟ್ಟಿಯಿಂದ ನಿಮ್ಮ ರಾಜ್ಯ, ನಂತರ ಜಿಲ್ಲೆ, ತಾಲ್ಲೂಕು ಮತ್ತು ಗ್ರಾಮವನ್ನು ಆರಿಸಿ."
+        },
+        "prefillFrom": "state",
+        "commonMistakes": [],
+        "documentNeeded": null
+      },
+      {
+        "step": 4,
+        "title": {
+          "en": "Enter your land details",
+          "kn": "ನಿಮ್ಮ ಜಮೀನಿನ ವಿವರ ನಮೂದಿಸಿ"
+        },
+        "officialFieldName": "Survey / Khata No. and Area (in Ha)",
+        "instruction": {
+          "en": "Copy the survey or khata number and the area exactly as printed on your land record.",
+          "kn": "ನಿಮ್ಮ ಜಮೀನು ದಾಖಲೆಯಲ್ಲಿ (ಪಹಣಿ/RTC) ಮುದ್ರಿತವಾಗಿರುವಂತೆಯೇ ಸರ್ವೆ ಅಥವಾ ಖಾತಾ ಸಂಖ್ಯೆ ಮತ್ತು ವಿಸ್ತೀರ್ಣವನ್ನು ಬರೆಯಿರಿ."
+        },
+        "prefillFrom": "landholdingHectares",
+        "commonMistakes": [
+          "Land still in a parent's name",
+          "Area typed in acres instead of hectares"
+        ],
+        "documentNeeded": "land_record"
+      },
+      {
+        "step": 5,
+        "title": {
+          "en": "Check your bank account",
+          "kn": "ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಖಾತೆ ಪರಿಶೀಲಿಸಿ"
+        },
+        "officialFieldName": "Bank Account (Aadhaar seeded)",
+        "instruction": {
+          "en": "Money is sent to your Aadhaar-seeded bank account. Ask your bank to link Aadhaar if it is not linked.",
+          "kn": "ಹಣ ಆಧಾರ್ ಜೋಡಣೆಯಾದ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಬರುತ್ತದೆ. ಜೋಡಣೆ ಆಗಿಲ್ಲದಿದ್ದರೆ ಬ್ಯಾಂಕ್‌ನಲ್ಲಿ ಆಧಾರ್ ಲಿಂಕ್ ಮಾಡಿಸಿ."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Closed or inactive account",
+          "Name mismatch with Aadhaar"
+        ],
+        "documentNeeded": "bank_passbook"
+      },
+      {
+        "step": 6,
+        "title": {
+          "en": "Upload documents and save",
+          "kn": "ದಾಖಲೆಗಳನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ ಉಳಿಸಿ"
+        },
+        "officialFieldName": "Upload Supporting Documents / Save",
+        "instruction": {
+          "en": "Upload the land record, press Save and write down the registration number. Complete e-KYC to receive instalments.",
+          "kn": "ಜಮೀನು ದಾಖಲೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ, Save ಒತ್ತಿ, ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು ಬರೆದಿಟ್ಟುಕೊಳ್ಳಿ. ಕಂತು ಪಡೆಯಲು e-KYC ಪೂರ್ಣಗೊಳಿಸಿ."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Not completing e-KYC after registration"
+        ],
+        "documentNeeded": null
+      }
+    ],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "pm-kisan",
+    "name": {
+      "en": "PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)"
+    },
+    "ministry": "Ministry of Agriculture and Farmers Welfare",
+    "level": "central",
+    "category": "agriculture",
+    "benefitAmount": 6000,
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "land_record",
+        "digilockerCanSupply": false
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "PM-KISAN portal",
+        "url": "https://pmkisan.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://pmkisan.gov.in/",
+    "benefitSummary": {
+      "en": "Rs 6,000 per year to landholding farmer families, in three instalments of Rs 2,000."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "occupation",
+          "op": "eq",
+          "value": "farmer",
+          "label": "You are a farmer"
+        },
+        {
+          "field": "landholdingHectares",
+          "op": "gt",
+          "value": 0,
+          "label": "Your family owns cultivable land"
+        },
+        {
+          "field": "isIncomeTaxPayer",
+          "op": "eq",
+          "value": false,
+          "label": "No one in the family paid income tax last year"
+        },
+        {
+          "field": "isGovtEmployee",
+          "op": "eq",
+          "value": false,
+          "label": "Not a serving or retired government employee (Group D / MTS staff are exempt)"
+        }
+      ]
+    },
+    "dataQuality": "curated"
+  },
+  {
+    "states": [],
+    "notChecked": [
+      "Your crop and area must be notified by your state for the season.",
+      "You need an insurable interest in the crop, with land or tenancy papers.",
+      "Enrol before your state's cut-off date for the season."
+    ],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "pmfby",
+    "name": {
+      "en": "Pradhan Mantri Fasal Bima Yojana (PMFBY)"
+    },
+    "ministry": "Ministry of Agriculture and Farmers Welfare",
+    "level": "central",
+    "category": "agriculture",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "land_record",
+        "digilockerCanSupply": false
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "PMFBY portal",
+        "url": "https://pmfby.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://pmfby.gov.in/",
+    "benefitSummary": {
+      "en": "Crop insurance: you pay at most 2% (Kharif), 1.5% (Rabi) or 5% (commercial and horticulture crops) of the sum insured."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "occupation",
+          "op": "eq",
+          "value": "farmer",
+          "label": "You are a farmer (owner, tenant or sharecropper)"
+        }
+      ]
+    },
+    "dataQuality": "curated"
+  },
+  {
+    "states": [],
+    "notChecked": [],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "kisan-credit-card",
+    "name": {
+      "en": "Kisan Credit Card (KCC)"
+    },
+    "ministry": "Ministry of Agriculture and Farmers Welfare",
+    "level": "central",
+    "category": "agriculture",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "land_record",
+        "digilockerCanSupply": false
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "myScheme: Kisan Credit Card",
+        "url": "https://www.myscheme.gov.in/schemes/kcc"
+      }
+    ],
+    "sourceUrl": "https://www.myscheme.gov.in/schemes/kcc",
+    "benefitSummary": {
+      "en": "Short-term crop loan at subsidised interest through a Kisan Credit Card from your bank."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "occupation",
+          "op": "eq",
+          "value": "farmer",
+          "label": "You are a farmer"
+        },
+        {
+          "field": "age",
+          "op": "between",
+          "value": [
+            18,
+            75
+          ],
+          "label": "Age 18 to 75"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [],
+    "notChecked": [
+      "Final eligibility is decided by the official PM-JAY beneficiary list. Check your name on the official portal."
+    ],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "ab-pmjay",
+    "name": {
+      "en": "Ayushman Bharat PM-JAY"
+    },
+    "ministry": "Ministry of Health and Family Welfare",
+    "level": "central",
+    "category": "health",
+    "benefitAmount": 500000,
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "ration_card",
+        "digilockerCanSupply": true
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "PM-JAY beneficiary portal",
+        "url": "https://beneficiary.nha.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://nha.gov.in/PM-JAY",
+    "benefitSummary": {
+      "en": "Free hospital treatment up to Rs 5 lakh per family per year at empanelled hospitals."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "any": [
+            {
+              "field": "age",
+              "op": "gte",
+              "value": 70,
+              "label": "Aged 70 or above"
+            },
+            {
+              "field": "isBPL",
+              "op": "eq",
+              "value": true,
+              "label": "Family holds a BPL / priority ration card (stand-in for the official beneficiary list)"
+            }
+          ],
+          "label": "Senior citizen aged 70+, or family on the priority list"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [],
+    "notChecked": [],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "janani-suraksha-yojana",
+    "name": {
+      "en": "Janani Suraksha Yojana (JSY)"
+    },
+    "ministry": "Ministry of Health and Family Welfare",
+    "level": "central",
+    "category": "health",
+    "benefitAmount": 1400,
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "National Health Mission",
+        "url": "https://nhm.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://nhm.gov.in/",
+    "benefitSummary": {
+      "en": "Cash help for pregnant women who deliver in a government or accredited health facility."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "gender",
+          "op": "eq",
+          "value": "female",
+          "label": "You are a woman"
+        },
+        {
+          "field": "isPregnantOrNewMother",
+          "op": "eq",
+          "value": true,
+          "label": "Pregnant or recently delivered"
+        },
+        {
+          "any": [
+            {
+              "field": "isBPL",
+              "op": "eq",
+              "value": true,
+              "label": "Family holds a BPL card"
+            },
+            {
+              "field": "category",
+              "op": "in",
+              "value": [
+                "SC",
+                "ST"
+              ],
+              "label": "Belongs to SC or ST"
+            },
+            {
+              "field": "state",
+              "op": "in",
+              "value": [
+                "Uttar Pradesh",
+                "Uttarakhand",
+                "Bihar",
+                "Jharkhand",
+                "Madhya Pradesh",
+                "Chhattisgarh",
+                "Assam",
+                "Rajasthan",
+                "Odisha",
+                "Jammu and Kashmir"
+              ],
+              "label": "Lives in a low-performing state"
+            }
+          ],
+          "label": "BPL, SC/ST, or living in a low-performing state"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [],
+    "notChecked": [],
+    "applicationSteps": [
+      {
+        "step": 1,
+        "title": {
+          "en": "Choose where to enrol"
+        },
+        "officialFieldName": "APY Subscriber Registration Form",
+        "instruction": {
+          "en": "Enrol at the bank or post office where you hold a savings account, or through its net/mobile banking. There is no agent fee."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Paying an agent to fill the form",
+          "Enrolling through more than one bank account"
+        ],
+        "documentNeeded": null
+      },
+      {
+        "step": 2,
+        "title": {
+          "en": "Enter your savings account number"
+        },
+        "officialFieldName": "Savings Bank Account No.",
+        "instruction": {
+          "en": "Copy the account number from your passbook. Fill it only on the bank form or the bank's own app."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Using a closed or dormant account",
+          "Name mismatch with Aadhaar"
+        ],
+        "documentNeeded": "bank_passbook"
+      },
+      {
+        "step": 3,
+        "title": {
+          "en": "Enter your age"
+        },
+        "officialFieldName": "Date of Birth / Age",
+        "instruction": {
+          "en": "Write your date of birth as on your Aadhaar or age proof."
+        },
+        "prefillFrom": "age",
+        "commonMistakes": [],
+        "documentNeeded": "age_proof"
+      },
+      {
+        "step": 4,
+        "title": {
+          "en": "Choose your pension amount"
+        },
+        "officialFieldName": "Pension Amount (Rs 1000 / 2000 / 3000 / 4000 / 5000)",
+        "instruction": {
+          "en": "Pick the monthly pension you want after 60. A higher pension needs a higher contribution, and joining younger costs less."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Choosing a contribution you cannot keep paying"
+        ],
+        "documentNeeded": null
+      },
+      {
+        "step": 5,
+        "title": {
+          "en": "Declare income tax status"
+        },
+        "officialFieldName": "Declaration: not an income tax payer",
+        "instruction": {
+          "en": "Confirm that you are not, and have not been, an income tax payer."
+        },
+        "prefillFrom": "isIncomeTaxPayer",
+        "commonMistakes": [],
+        "documentNeeded": null
+      },
+      {
+        "step": 6,
+        "title": {
+          "en": "Name your nominee"
+        },
+        "officialFieldName": "Name of Nominee and Relationship",
+        "instruction": {
+          "en": "Write the full name of the family member who should receive the money, and how they are related to you."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Leaving the nominee blank"
+        ],
+        "documentNeeded": null
+      },
+      {
+        "step": 7,
+        "title": {
+          "en": "Give auto-debit consent"
+        },
+        "officialFieldName": "Consent for Auto-Debit",
+        "instruction": {
+          "en": "Sign the consent so the bank can deduct your monthly contribution from your account. Keep enough balance before the debit date."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Not keeping enough balance, so the cover lapses"
+        ],
+        "documentNeeded": null
+      }
+    ],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "atal-pension-yojana",
+    "name": {
+      "en": "Atal Pension Yojana (APY)"
+    },
+    "ministry": "Ministry of Finance",
+    "level": "central",
+    "category": "pension",
+    "benefitAmount": 36000,
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "Jan Suraksha portal",
+        "url": "https://jansuraksha.gov.in/"
+      },
+      {
+        "label": "myScheme: Atal Pension Yojana",
+        "url": "https://www.myscheme.gov.in/schemes/apy"
+      }
+    ],
+    "sourceUrl": "https://www.myscheme.gov.in/schemes/apy",
+    "benefitSummary": {
+      "en": "Guaranteed pension of Rs 1,000 to Rs 5,000 a month after age 60, for a small monthly contribution."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "age",
+          "op": "between",
+          "value": [
+            18,
+            40
+          ],
+          "label": "Age 18 to 40"
+        },
+        {
+          "field": "hasBankAccount",
+          "op": "eq",
+          "value": true,
+          "label": "Has a bank account"
+        },
+        {
+          "field": "isIncomeTaxPayer",
+          "op": "eq",
+          "value": false,
+          "label": "Not an income tax payer"
+        }
+      ]
+    },
+    "dataQuality": "curated"
+  },
+  {
+    "states": [],
+    "notChecked": [],
+    "applicationSteps": [
+      {
+        "step": 1,
+        "title": {
+          "en": "Choose where to enrol"
+        },
+        "officialFieldName": "PMJJBY Consent-cum-Declaration Form",
+        "instruction": {
+          "en": "Enrol at the bank or post office where you hold a savings account, or through its net/mobile banking. There is no agent fee."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Paying an agent to fill the form",
+          "Enrolling through more than one bank account"
+        ],
+        "documentNeeded": null
+      },
+      {
+        "step": 2,
+        "title": {
+          "en": "Enter your savings account number"
+        },
+        "officialFieldName": "Savings Bank Account No.",
+        "instruction": {
+          "en": "Copy the account number from your passbook. Fill it only on the bank form or the bank's own app."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Using a closed or dormant account",
+          "Name mismatch with Aadhaar"
+        ],
+        "documentNeeded": "bank_passbook"
+      },
+      {
+        "step": 3,
+        "title": {
+          "en": "Enter your age"
+        },
+        "officialFieldName": "Date of Birth / Age",
+        "instruction": {
+          "en": "Write your date of birth as on your Aadhaar or age proof."
+        },
+        "prefillFrom": "age",
+        "commonMistakes": [],
+        "documentNeeded": "age_proof"
+      },
+      {
+        "step": 4,
+        "title": {
+          "en": "Name your nominee"
+        },
+        "officialFieldName": "Name of Nominee and Relationship",
+        "instruction": {
+          "en": "Write the full name of the family member who should receive the money, and how they are related to you."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Leaving the nominee blank"
+        ],
+        "documentNeeded": null
+      },
+      {
+        "step": 5,
+        "title": {
+          "en": "Give auto-debit consent"
+        },
+        "officialFieldName": "Consent for Auto-Debit",
+        "instruction": {
+          "en": "Sign the consent so the bank can deduct Rs 436 once a year from your account. Keep enough balance before the debit date."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Not keeping enough balance, so the cover lapses"
+        ],
+        "documentNeeded": null
+      }
+    ],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "pmjjby",
+    "name": {
+      "en": "Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY)"
+    },
+    "ministry": "Ministry of Finance",
+    "level": "central",
+    "category": "social_security",
+    "benefitAmount": 200000,
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      },
+      {
+        "code": "age_proof",
+        "digilockerCanSupply": true
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "Jan Suraksha portal",
+        "url": "https://jansuraksha.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://jansuraksha.gov.in/",
+    "benefitSummary": {
+      "en": "Life insurance cover of Rs 2 lakh for a premium of Rs 436 per year."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "age",
+          "op": "between",
+          "value": [
+            18,
+            50
+          ],
+          "label": "Age 18 to 50"
+        },
+        {
+          "field": "hasBankAccount",
+          "op": "eq",
+          "value": true,
+          "label": "Has a bank account"
+        }
+      ]
+    },
+    "dataQuality": "curated"
+  },
+  {
+    "states": [],
+    "notChecked": [],
+    "applicationSteps": [
+      {
+        "step": 1,
+        "title": {
+          "en": "Choose where to enrol",
+          "ta": "எங்கே சேர்வது என்று தேர்ந்தெடுங்கள்"
+        },
+        "officialFieldName": "PMSBY Consent-cum-Declaration Form",
+        "instruction": {
+          "en": "Enrol at the bank or post office where you hold a savings account, or through its net/mobile banking. There is no agent fee.",
+          "ta": "உங்கள் சேமிப்புக் கணக்கு உள்ள வங்கி அல்லது அஞ்சலகத்தில், அல்லது அதன் நெட்/மொபைல் பேங்கிங் மூலம் சேருங்கள். முகவர் கட்டணம் எதுவும் இல்லை."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Paying an agent to fill the form",
+          "Enrolling through more than one bank account"
+        ],
+        "documentNeeded": null
+      },
+      {
+        "step": 2,
+        "title": {
+          "en": "Enter your savings account number",
+          "ta": "உங்கள் சேமிப்புக் கணக்கு எண்ணை எழுதுங்கள்"
+        },
+        "officialFieldName": "Savings Bank Account No.",
+        "instruction": {
+          "en": "Copy the account number from your passbook. Fill it only on the bank form or the bank's own app.",
+          "ta": "பாஸ்புக்கில் உள்ள கணக்கு எண்ணை அப்படியே எழுதுங்கள். வங்கிப் படிவத்தில் அல்லது வங்கியின் சொந்த செயலியில் மட்டும் நிரப்புங்கள்."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Using a closed or dormant account",
+          "Name mismatch with Aadhaar"
+        ],
+        "documentNeeded": "bank_passbook"
+      },
+      {
+        "step": 3,
+        "title": {
+          "en": "Enter your age",
+          "ta": "உங்கள் வயதை எழுதுங்கள்"
+        },
+        "officialFieldName": "Date of Birth / Age",
+        "instruction": {
+          "en": "Write your date of birth as on your Aadhaar or age proof.",
+          "ta": "ஆதார் அல்லது வயதுச் சான்றில் உள்ளபடி பிறந்த தேதியை எழுதுங்கள்."
+        },
+        "prefillFrom": "age",
+        "commonMistakes": [],
+        "documentNeeded": "age_proof"
+      },
+      {
+        "step": 4,
+        "title": {
+          "en": "Name your nominee",
+          "ta": "வாரிசுதாரரின் பெயரை எழுதுங்கள்"
+        },
+        "officialFieldName": "Name of Nominee and Relationship",
+        "instruction": {
+          "en": "Write the full name of the family member who should receive the money, and how they are related to you.",
+          "ta": "பணம் பெற வேண்டிய குடும்ப உறுப்பினரின் முழுப் பெயரையும், அவர் உங்களுக்கு என்ன உறவு என்பதையும் எழுதுங்கள்."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Leaving the nominee blank"
+        ],
+        "documentNeeded": null
+      },
+      {
+        "step": 5,
+        "title": {
+          "en": "Give auto-debit consent",
+          "ta": "தானியங்கி பிடித்தத்திற்கு ஒப்புதல் கொடுங்கள்"
+        },
+        "officialFieldName": "Consent for Auto-Debit",
+        "instruction": {
+          "en": "Sign the consent so the bank can deduct Rs 20 once a year from your account. Keep enough balance before the debit date.",
+          "ta": "வங்கி ஆண்டுக்கு ஒருமுறை ரூ.20 பிடித்தம் செய்ய ஒப்புதல் கையொப்பமிடுங்கள். பிடித்த தேதிக்கு முன் கணக்கில் போதுமான இருப்பு வைத்திருங்கள்."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Not keeping enough balance, so the cover lapses"
+        ],
+        "documentNeeded": null
+      }
+    ],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "pmsby",
+    "name": {
+      "en": "Pradhan Mantri Suraksha Bima Yojana (PMSBY)"
+    },
+    "ministry": "Ministry of Finance",
+    "level": "central",
+    "category": "social_security",
+    "benefitAmount": 200000,
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      },
+      {
+        "code": "age_proof",
+        "digilockerCanSupply": true
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "Jan Suraksha portal",
+        "url": "https://jansuraksha.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://jansuraksha.gov.in/",
+    "benefitSummary": {
+      "en": "Accident insurance cover of Rs 2 lakh for a premium of Rs 20 per year."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "age",
+          "op": "between",
+          "value": [
+            18,
+            70
+          ],
+          "label": "Age 18 to 70"
+        },
+        {
+          "field": "hasBankAccount",
+          "op": "eq",
+          "value": true,
+          "label": "Has a bank account"
+        }
+      ]
+    },
+    "dataQuality": "curated"
+  },
+  {
+    "states": [],
+    "notChecked": [],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "ignoaps",
+    "name": {
+      "en": "Indira Gandhi National Old Age Pension Scheme (IGNOAPS)"
+    },
+    "ministry": "Ministry of Rural Development",
+    "level": "central",
+    "category": "pension",
+    "benefitAmount": 2400,
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "age_proof",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "ration_card",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "NSAP portal",
+        "url": "https://nsap.nic.in/"
+      },
+      {
+        "label": "myScheme: IGNOAPS",
+        "url": "https://www.myscheme.gov.in/schemes/nsap-ignoaps"
+      }
+    ],
+    "sourceUrl": "https://www.myscheme.gov.in/schemes/nsap-ignoaps",
+    "benefitSummary": {
+      "en": "Monthly old-age pension: central share Rs 200 (age 60-79) or Rs 500 (age 80+). Most states add more."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 60,
+          "label": "Aged 60 or above"
+        },
+        {
+          "field": "isBPL",
+          "op": "eq",
+          "value": true,
+          "label": "Family is below the poverty line (BPL)"
+        }
+      ]
+    },
+    "dataQuality": "curated"
+  },
+  {
+    "states": [],
+    "notChecked": [
+      "Regular courses only: distance, correspondence and diploma courses are not eligible.",
+      "You must not be receiving any other scholarship or fee reimbursement."
+    ],
+    "applicationSteps": [
+      {
+        "step": 1,
+        "title": {
+          "en": "Do One Time Registration on NSP",
+          "pa": "NSP ਤੇ ਵਨ ਟਾਈਮ ਰਜਿਸਟ੍ਰੇਸ਼ਨ ਕਰੋ"
+        },
+        "officialFieldName": "One Time Registration (OTR)",
+        "instruction": {
+          "en": "On scholarships.gov.in, complete One Time Registration with your Aadhaar-linked mobile number. Enter Aadhaar and OTP only on that website.",
+          "pa": "scholarships.gov.in ਤੇ ਆਪਣੇ ਆਧਾਰ ਨਾਲ ਜੁੜੇ ਮੋਬਾਈਲ ਨੰਬਰ ਨਾਲ ਵਨ ਟਾਈਮ ਰਜਿਸਟ੍ਰੇਸ਼ਨ ਪੂਰੀ ਕਰੋ। ਆਧਾਰ ਅਤੇ ਓਟੀਪੀ ਸਿਰਫ਼ ਉਸੇ ਵੈੱਬਸਾਈਟ ਤੇ ਭਰੋ।"
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Creating more than one OTR",
+          "Using a parent's mobile number that you cannot access later"
+        ],
+        "documentNeeded": "aadhaar"
+      },
+      {
+        "step": 2,
+        "title": {
+          "en": "Select your state of domicile",
+          "pa": "ਆਪਣਾ ਰਿਹਾਇਸ਼ੀ ਰਾਜ ਚੁਣੋ"
+        },
+        "officialFieldName": "State of Domicile",
+        "instruction": {
+          "en": "Choose the state named on your domicile certificate. It cannot be changed later.",
+          "pa": "ਉਹ ਰਾਜ ਚੁਣੋ ਜੋ ਤੁਹਾਡੇ ਰਿਹਾਇਸ਼ ਸਰਟੀਫਿਕੇਟ ਤੇ ਲਿਖਿਆ ਹੈ। ਇਹ ਬਾਅਦ ਵਿੱਚ ਬਦਲਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ।"
+        },
+        "prefillFrom": "state",
+        "commonMistakes": [
+          "Choosing the state where you study instead of your home state"
+        ],
+        "documentNeeded": "domicile_certificate"
+      },
+      {
+        "step": 3,
+        "title": {
+          "en": "Enter Class 12 board details"
+        },
+        "officialFieldName": "Class XII Board / Roll Number",
+        "instruction": {
+          "en": "Enter your board, roll number and year of passing exactly as on your Class 12 marksheet."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Roll number typed wrongly, so the merit list does not match"
+        ],
+        "documentNeeded": "school_certificate"
+      },
+      {
+        "step": 4,
+        "title": {
+          "en": "Enter annual family income",
+          "pa": "ਪਰਿਵਾਰ ਦੀ ਸਾਲਾਨਾ ਆਮਦਨ ਭਰੋ"
+        },
+        "officialFieldName": "Annual Family Income",
+        "instruction": {
+          "en": "Type the income exactly as written on your income certificate, and upload the certificate.",
+          "pa": "ਆਮਦਨ ਬਿਲਕੁਲ ਉਹੀ ਭਰੋ ਜੋ ਆਮਦਨ ਸਰਟੀਫਿਕੇਟ ਤੇ ਲਿਖੀ ਹੈ, ਅਤੇ ਸਰਟੀਫਿਕੇਟ ਅਪਲੋਡ ਕਰੋ।"
+        },
+        "prefillFrom": "annualFamilyIncome",
+        "commonMistakes": [
+          "Expired income certificate",
+          "Income typed differently from the certificate"
+        ],
+        "documentNeeded": "income_certificate"
+      },
+      {
+        "step": 5,
+        "title": {
+          "en": "Enter your course and institute",
+          "pa": "ਆਪਣਾ ਕੋਰਸ ਅਤੇ ਸੰਸਥਾ ਭਰੋ"
+        },
+        "officialFieldName": "Institute / Course Details",
+        "instruction": {
+          "en": "Search for your college by name or AISHE code and pick your course and year.",
+          "pa": "ਆਪਣੇ ਕਾਲਜ ਨੂੰ ਨਾਮ ਜਾਂ AISHE ਕੋਡ ਨਾਲ ਲੱਭੋ ਅਤੇ ਆਪਣਾ ਕੋਰਸ ਤੇ ਸਾਲ ਚੁਣੋ।"
+        },
+        "prefillFrom": "educationLevel",
+        "commonMistakes": [
+          "Selecting the wrong institute with a similar name"
+        ],
+        "documentNeeded": "school_certificate"
+      },
+      {
+        "step": 6,
+        "title": {
+          "en": "Check your bank account",
+          "pa": "ਆਪਣਾ ਬੈਂਕ ਖਾਤਾ ਜਾਂਚੋ"
+        },
+        "officialFieldName": "Bank Account (Aadhaar seeded)",
+        "instruction": {
+          "en": "The scholarship is paid to the bank account linked with your Aadhaar. It must be in your own name.",
+          "pa": "ਵਜ਼ੀਫ਼ਾ ਤੁਹਾਡੇ ਆਧਾਰ ਨਾਲ ਜੁੜੇ ਬੈਂਕ ਖਾਤੇ ਵਿੱਚ ਆਉਂਦਾ ਹੈ। ਖਾਤਾ ਤੁਹਾਡੇ ਆਪਣੇ ਨਾਮ ਤੇ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।"
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Giving a parent's account",
+          "Account not seeded with Aadhaar"
+        ],
+        "documentNeeded": "bank_passbook"
+      },
+      {
+        "step": 7,
+        "title": {
+          "en": "Submit and note the application ID",
+          "pa": "ਜਮ੍ਹਾਂ ਕਰੋ ਅਤੇ ਅਰਜ਼ੀ ਆਈਡੀ ਨੋਟ ਕਰੋ"
+        },
+        "officialFieldName": "Final Submit (Central Sector Scheme of Scholarship)",
+        "instruction": {
+          "en": "Review every field, press Final Submit and write down the application ID. Then ask your institute to verify it on NSP.",
+          "pa": "ਹਰ ਖਾਨਾ ਦੁਬਾਰਾ ਜਾਂਚੋ, Final Submit ਦਬਾਓ ਅਤੇ ਅਰਜ਼ੀ ਆਈਡੀ ਲਿਖ ਲਓ। ਫਿਰ ਆਪਣੀ ਸੰਸਥਾ ਨੂੰ NSP ਤੇ ਇਸਦੀ ਤਸਦੀਕ ਕਰਨ ਲਈ ਕਹੋ।"
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Submitting after the last date",
+          "Not following up on institute verification"
+        ],
+        "documentNeeded": null
+      }
+    ],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "central-sector-scholarship",
+    "name": {
+      "en": "Central Sector Scheme of Scholarship for College and University Students (PM-USP CSSS)"
+    },
+    "ministry": "Ministry of Education",
+    "level": "central",
+    "category": "education",
+    "benefitAmount": 12000,
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "income_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "school_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "National Scholarship Portal",
+        "url": "https://scholarships.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://scholarships.gov.in/",
+    "benefitSummary": {
+      "en": "Rs 12,000 per year for the first three years of a degree and Rs 20,000 per year at post-graduation."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "educationLevel",
+          "op": "in",
+          "value": [
+            "undergraduate",
+            "postgraduate"
+          ],
+          "label": "Studying a regular degree course"
+        },
+        {
+          "field": "class12Above80thPercentile",
+          "op": "eq",
+          "value": true,
+          "label": "Scored above the 80th percentile of your board in Class 12"
+        },
+        {
+          "field": "annualFamilyIncome",
+          "op": "lte",
+          "value": 450000,
+          "label": "Family income up to Rs 4.5 lakh per year"
+        }
+      ]
+    },
+    "dataQuality": "curated"
+  },
+  {
+    "states": [],
+    "notChecked": [
+      "Many states take PMS-SC applications on their own scholarship portal. Check which portal your state uses."
+    ],
+    "applicationSteps": [
+      {
+        "step": 1,
+        "title": {
+          "en": "Do One Time Registration on NSP",
+          "pa": "NSP ਤੇ ਵਨ ਟਾਈਮ ਰਜਿਸਟ੍ਰੇਸ਼ਨ ਕਰੋ"
+        },
+        "officialFieldName": "One Time Registration (OTR)",
+        "instruction": {
+          "en": "On scholarships.gov.in, complete One Time Registration with your Aadhaar-linked mobile number. Enter Aadhaar and OTP only on that website.",
+          "pa": "scholarships.gov.in ਤੇ ਆਪਣੇ ਆਧਾਰ ਨਾਲ ਜੁੜੇ ਮੋਬਾਈਲ ਨੰਬਰ ਨਾਲ ਵਨ ਟਾਈਮ ਰਜਿਸਟ੍ਰੇਸ਼ਨ ਪੂਰੀ ਕਰੋ। ਆਧਾਰ ਅਤੇ ਓਟੀਪੀ ਸਿਰਫ਼ ਉਸੇ ਵੈੱਬਸਾਈਟ ਤੇ ਭਰੋ।"
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Creating more than one OTR",
+          "Using a parent's mobile number that you cannot access later"
+        ],
+        "documentNeeded": "aadhaar"
+      },
+      {
+        "step": 2,
+        "title": {
+          "en": "Select your state of domicile",
+          "pa": "ਆਪਣਾ ਰਿਹਾਇਸ਼ੀ ਰਾਜ ਚੁਣੋ"
+        },
+        "officialFieldName": "State of Domicile",
+        "instruction": {
+          "en": "Choose the state named on your domicile certificate. It cannot be changed later.",
+          "pa": "ਉਹ ਰਾਜ ਚੁਣੋ ਜੋ ਤੁਹਾਡੇ ਰਿਹਾਇਸ਼ ਸਰਟੀਫਿਕੇਟ ਤੇ ਲਿਖਿਆ ਹੈ। ਇਹ ਬਾਅਦ ਵਿੱਚ ਬਦਲਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ।"
+        },
+        "prefillFrom": "state",
+        "commonMistakes": [
+          "Choosing the state where you study instead of your home state"
+        ],
+        "documentNeeded": "domicile_certificate"
+      },
+      {
+        "step": 3,
+        "title": {
+          "en": "Enter your category",
+          "pa": "ਆਪਣਾ ਵਰਗ ਭਰੋ"
+        },
+        "officialFieldName": "Category",
+        "instruction": {
+          "en": "Select SC and upload your caste certificate issued by the competent authority.",
+          "pa": "SC ਚੁਣੋ ਅਤੇ ਸਮਰੱਥ ਅਧਿਕਾਰੀ ਵੱਲੋਂ ਜਾਰੀ ਆਪਣਾ ਜਾਤੀ ਸਰਟੀਫਿਕੇਟ ਅਪਲੋਡ ਕਰੋ।"
+        },
+        "prefillFrom": "category",
+        "commonMistakes": [
+          "Caste certificate in a parent's name instead of the student's"
+        ],
+        "documentNeeded": "caste_certificate"
+      },
+      {
+        "step": 4,
+        "title": {
+          "en": "Enter annual family income",
+          "pa": "ਪਰਿਵਾਰ ਦੀ ਸਾਲਾਨਾ ਆਮਦਨ ਭਰੋ"
+        },
+        "officialFieldName": "Annual Family Income",
+        "instruction": {
+          "en": "Type the income exactly as written on your income certificate, and upload the certificate.",
+          "pa": "ਆਮਦਨ ਬਿਲਕੁਲ ਉਹੀ ਭਰੋ ਜੋ ਆਮਦਨ ਸਰਟੀਫਿਕੇਟ ਤੇ ਲਿਖੀ ਹੈ, ਅਤੇ ਸਰਟੀਫਿਕੇਟ ਅਪਲੋਡ ਕਰੋ।"
+        },
+        "prefillFrom": "annualFamilyIncome",
+        "commonMistakes": [
+          "Expired income certificate",
+          "Income typed differently from the certificate"
+        ],
+        "documentNeeded": "income_certificate"
+      },
+      {
+        "step": 5,
+        "title": {
+          "en": "Enter your course and institute",
+          "pa": "ਆਪਣਾ ਕੋਰਸ ਅਤੇ ਸੰਸਥਾ ਭਰੋ"
+        },
+        "officialFieldName": "Institute / Course Details",
+        "instruction": {
+          "en": "Search for your college by name or AISHE code and pick your course and year.",
+          "pa": "ਆਪਣੇ ਕਾਲਜ ਨੂੰ ਨਾਮ ਜਾਂ AISHE ਕੋਡ ਨਾਲ ਲੱਭੋ ਅਤੇ ਆਪਣਾ ਕੋਰਸ ਤੇ ਸਾਲ ਚੁਣੋ।"
+        },
+        "prefillFrom": "educationLevel",
+        "commonMistakes": [
+          "Selecting the wrong institute with a similar name"
+        ],
+        "documentNeeded": "school_certificate"
+      },
+      {
+        "step": 6,
+        "title": {
+          "en": "Check your bank account",
+          "pa": "ਆਪਣਾ ਬੈਂਕ ਖਾਤਾ ਜਾਂਚੋ"
+        },
+        "officialFieldName": "Bank Account (Aadhaar seeded)",
+        "instruction": {
+          "en": "The scholarship is paid to the bank account linked with your Aadhaar. It must be in your own name.",
+          "pa": "ਵਜ਼ੀਫ਼ਾ ਤੁਹਾਡੇ ਆਧਾਰ ਨਾਲ ਜੁੜੇ ਬੈਂਕ ਖਾਤੇ ਵਿੱਚ ਆਉਂਦਾ ਹੈ। ਖਾਤਾ ਤੁਹਾਡੇ ਆਪਣੇ ਨਾਮ ਤੇ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।"
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Giving a parent's account",
+          "Account not seeded with Aadhaar"
+        ],
+        "documentNeeded": "bank_passbook"
+      },
+      {
+        "step": 7,
+        "title": {
+          "en": "Submit and note the application ID",
+          "pa": "ਜਮ੍ਹਾਂ ਕਰੋ ਅਤੇ ਅਰਜ਼ੀ ਆਈਡੀ ਨੋਟ ਕਰੋ"
+        },
+        "officialFieldName": "Final Submit (Post-Matric Scholarship for SC Students)",
+        "instruction": {
+          "en": "Review every field, press Final Submit and write down the application ID. Then ask your institute to verify it on NSP.",
+          "pa": "ਹਰ ਖਾਨਾ ਦੁਬਾਰਾ ਜਾਂਚੋ, Final Submit ਦਬਾਓ ਅਤੇ ਅਰਜ਼ੀ ਆਈਡੀ ਲਿਖ ਲਓ। ਫਿਰ ਆਪਣੀ ਸੰਸਥਾ ਨੂੰ NSP ਤੇ ਇਸਦੀ ਤਸਦੀਕ ਕਰਨ ਲਈ ਕਹੋ।"
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Submitting after the last date",
+          "Not following up on institute verification"
+        ],
+        "documentNeeded": null
+      }
+    ],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "post-matric-scholarship-sc",
+    "name": {
+      "en": "Post-Matric Scholarship for Scheduled Caste Students (PMS-SC)"
+    },
+    "ministry": "Ministry of Social Justice and Empowerment",
+    "level": "central",
+    "category": "education",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "caste_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "income_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "domicile_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "school_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "National Scholarship Portal",
+        "url": "https://scholarships.gov.in/"
+      },
+      {
+        "label": "Ministry of Social Justice: scheme page",
+        "url": "https://socialjustice.gov.in/schemes/25"
+      }
+    ],
+    "sourceUrl": "https://socialjustice.gov.in/schemes/25",
+    "benefitSummary": {
+      "en": "Scholarship for SC students studying after Class 10: academic allowance plus compulsory fees."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "category",
+          "op": "eq",
+          "value": "SC",
+          "label": "Belongs to a Scheduled Caste"
+        },
+        {
+          "field": "annualFamilyIncome",
+          "op": "lte",
+          "value": 250000,
+          "label": "Parents' or guardians' income up to Rs 2.5 lakh per year"
+        },
+        {
+          "field": "educationLevel",
+          "op": "in",
+          "value": [
+            "class_11_12",
+            "diploma",
+            "undergraduate",
+            "postgraduate"
+          ],
+          "label": "Studying after Class 10 (post-matric)"
+        }
+      ]
+    },
+    "dataQuality": "curated"
+  },
+  {
+    "states": [],
+    "notChecked": [],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "pm-scholarship-capf",
+    "name": {
+      "en": "Prime Minister's Scholarship Scheme for wards of CAPF and Assam Rifles personnel"
+    },
+    "ministry": "Ministry of Home Affairs",
+    "level": "central",
+    "category": "education",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "school_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "National Scholarship Portal",
+        "url": "https://scholarships.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://scholarships.gov.in/",
+    "benefitSummary": {
+      "en": "Scholarship for children and widows of CAPF and Assam Rifles personnel studying professional degree courses."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "isCAPFWard",
+          "op": "eq",
+          "value": true,
+          "label": "Child or widow of CAPF / Assam Rifles personnel"
+        },
+        {
+          "field": "educationLevel",
+          "op": "eq",
+          "value": "undergraduate",
+          "label": "Studying a first professional degree course"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [],
+    "notChecked": [
+      "You must have been selected through the state-level NMMS exam taken in Class 8."
+    ],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "nmms",
+    "name": {
+      "en": "National Means-cum-Merit Scholarship (NMMS)"
+    },
+    "ministry": "Ministry of Education",
+    "level": "central",
+    "category": "education",
+    "benefitAmount": 12000,
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "income_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "school_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "National Scholarship Portal",
+        "url": "https://scholarships.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://scholarships.gov.in/",
+    "benefitSummary": {
+      "en": "Rs 12,000 per year for students of Classes 9 to 12 selected through the state NMMS exam."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "educationLevel",
+          "op": "in",
+          "value": [
+            "class_9_10",
+            "class_11_12"
+          ],
+          "label": "Studying in Class 9 to 12"
+        },
+        {
+          "field": "institutionType",
+          "op": "in",
+          "value": [
+            "government",
+            "aided"
+          ],
+          "label": "Studying in a government or government-aided school"
+        },
+        {
+          "field": "annualFamilyIncome",
+          "op": "lte",
+          "value": 350000,
+          "label": "Parental income up to Rs 3.5 lakh per year"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [],
+    "notChecked": [],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "pmmvy",
+    "name": {
+      "en": "Pradhan Mantri Matru Vandana Yojana (PMMVY)"
+    },
+    "ministry": "Ministry of Women and Child Development",
+    "level": "central",
+    "category": "women_child",
+    "benefitAmount": 5000,
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "PMMVY portal",
+        "url": "https://pmmvy.wcd.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://pmmvy.wcd.gov.in/",
+    "benefitSummary": {
+      "en": "Maternity benefit: Rs 5,000 for the first child, and Rs 6,000 for a second child if she is a girl."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "gender",
+          "op": "eq",
+          "value": "female",
+          "label": "You are a woman"
+        },
+        {
+          "field": "isPregnantOrNewMother",
+          "op": "eq",
+          "value": true,
+          "label": "Pregnant or a new mother"
+        },
+        {
+          "field": "isGovtEmployee",
+          "op": "eq",
+          "value": false,
+          "label": "Not a government employee or pensioner"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [],
+    "notChecked": [],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "sukanya-samriddhi-yojana",
+    "name": {
+      "en": "Sukanya Samriddhi Yojana (SSY)"
+    },
+    "ministry": "Ministry of Finance",
+    "level": "central",
+    "category": "women_child",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "age_proof",
+        "digilockerCanSupply": true
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "National Savings Institute",
+        "url": "https://www.nsiindia.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://www.nsiindia.gov.in/",
+    "benefitSummary": {
+      "en": "Government-backed savings account for a girl child, opened before she turns 10."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "hasGirlChildUnder10",
+          "op": "eq",
+          "value": true,
+          "label": "You have a daughter under 10 years of age"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [],
+    "notChecked": [],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "pm-ujjwala-yojana",
+    "name": {
+      "en": "Pradhan Mantri Ujjwala Yojana (PMUY)"
+    },
+    "ministry": "Ministry of Petroleum and Natural Gas",
+    "level": "central",
+    "category": "women_child",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "ration_card",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "PMUY portal",
+        "url": "https://pmuy.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://pmuy.gov.in/",
+    "benefitSummary": {
+      "en": "Deposit-free LPG gas connection for adult women from poor households."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "gender",
+          "op": "eq",
+          "value": "female",
+          "label": "You are a woman"
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "label": "Aged 18 or above"
+        },
+        {
+          "field": "hasLPGConnection",
+          "op": "eq",
+          "value": false,
+          "label": "No LPG connection in the household yet"
+        },
+        {
+          "any": [
+            {
+              "field": "isBPL",
+              "op": "eq",
+              "value": true,
+              "label": "Family holds a BPL / priority ration card"
+            },
+            {
+              "field": "category",
+              "op": "in",
+              "value": [
+                "SC",
+                "ST"
+              ],
+              "label": "Belongs to SC or ST"
+            }
+          ],
+          "label": "From a poor household"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [],
+    "notChecked": [
+      "Rural applicants are chosen from the official Awaas+ survey list."
+    ],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "pm-awas-yojana",
+    "name": {
+      "en": "Pradhan Mantri Awas Yojana (Urban 2.0 and Gramin)"
+    },
+    "ministry": "Ministry of Housing and Urban Affairs / Ministry of Rural Development",
+    "level": "central",
+    "category": "housing",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "income_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "PMAY-Urban portal",
+        "url": "https://pmay-urban.gov.in/"
+      },
+      {
+        "label": "PMAY-Gramin portal",
+        "url": "https://pmayg.nic.in/"
+      }
+    ],
+    "sourceUrl": "https://pmay-urban.gov.in/",
+    "benefitSummary": {
+      "en": "Financial help to build or buy a pucca house for families without one."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "hasPuccaHouse",
+          "op": "eq",
+          "value": false,
+          "label": "Family does not own a pucca house"
+        },
+        {
+          "field": "annualFamilyIncome",
+          "op": "lte",
+          "value": 900000,
+          "label": "Family income up to Rs 9 lakh per year"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [],
+    "notChecked": [
+      "You must be willing to do unskilled manual work. Apply at your Gram Panchayat."
+    ],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "mgnrega",
+    "name": {
+      "en": "MGNREGA Job Card"
+    },
+    "ministry": "Ministry of Rural Development",
+    "level": "central",
+    "category": "employment",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "MGNREGA portal",
+        "url": "https://nrega.nic.in/"
+      }
+    ],
+    "sourceUrl": "https://nrega.nic.in/",
+    "benefitSummary": {
+      "en": "Job card for up to 100 days of paid unskilled work per rural household each year."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "residence",
+          "op": "eq",
+          "value": "rural",
+          "label": "Lives in a rural area"
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "label": "Aged 18 or above"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [],
+    "notChecked": [
+      "You need a Certificate of Vending, vendor ID card or Letter of Recommendation from your Urban Local Body.",
+      "Each bigger loan is given only after the earlier one is repaid."
+    ],
+    "applicationSteps": [
+      {
+        "step": 1,
+        "title": {
+          "en": "Open the loan application",
+          "hi": "लोन आवेदन खोलें"
+        },
+        "officialFieldName": "Apply for Loan (1st tranche)",
+        "instruction": {
+          "en": "On pmsvanidhi.mohua.gov.in choose to apply for the first loan (up to Rs 15,000). Applying is free.",
+          "hi": "pmsvanidhi.mohua.gov.in पर पहला लोन (15,000 रुपये तक) चुनें। आवेदन बिल्कुल मुफ़्त है।"
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Paying anyone a \"processing fee\"",
+          "Applying on a .com look-alike website"
+        ],
+        "documentNeeded": null
+      },
+      {
+        "step": 2,
+        "title": {
+          "en": "Enter your mobile number",
+          "hi": "अपना मोबाइल नंबर भरें"
+        },
+        "officialFieldName": "Mobile Number (linked with Aadhaar)",
+        "instruction": {
+          "en": "Enter your Aadhaar-linked mobile number and the OTP sent to it. Type this only on the official website. DigiScheme never asks for it.",
+          "hi": "आधार से जुड़ा मोबाइल नंबर और उस पर आया ओटीपी भरें। यह सिर्फ़ आधिकारिक वेबसाइट पर भरें। डिजीस्कीम यह कभी नहीं माँगता।"
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Telling the OTP to someone on the phone"
+        ],
+        "documentNeeded": "aadhaar"
+      },
+      {
+        "step": 3,
+        "title": {
+          "en": "Choose your vendor category",
+          "hi": "अपनी विक्रेता श्रेणी चुनें"
+        },
+        "officialFieldName": "Vendor Category / Survey Reference Number (SRN)",
+        "instruction": {
+          "en": "Enter the number on your Certificate of Vending or vendor ID card. If you have none, ask your Urban Local Body for a Letter of Recommendation.",
+          "hi": "अपने वेंडिंग सर्टिफ़िकेट या विक्रेता पहचान पत्र पर लिखा नंबर भरें। अगर नहीं है, तो नगर निगम/नगर पालिका से सिफ़ारिश पत्र (LoR) माँगें।"
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Leaving the SRN blank when you were surveyed"
+        ],
+        "documentNeeded": null
+      },
+      {
+        "step": 4,
+        "title": {
+          "en": "Select your state and city",
+          "hi": "अपना राज्य और शहर चुनें"
+        },
+        "officialFieldName": "State / Urban Local Body",
+        "instruction": {
+          "en": "Choose your state and the municipal body of the area where you vend.",
+          "hi": "अपना राज्य और जिस इलाके में आप सामान बेचते हैं वहाँ की नगर निकाय चुनें।"
+        },
+        "prefillFrom": "state",
+        "commonMistakes": [],
+        "documentNeeded": null
+      },
+      {
+        "step": 5,
+        "title": {
+          "en": "Enter your bank details",
+          "hi": "अपने बैंक की जानकारी भरें"
+        },
+        "officialFieldName": "Bank Account Number / IFSC",
+        "instruction": {
+          "en": "Type the account number and IFSC printed on your passbook. Fill them only on the official website.",
+          "hi": "पासबुक पर छपा खाता नंबर और IFSC भरें। इन्हें सिर्फ़ आधिकारिक वेबसाइट पर भरें।"
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Using a closed account",
+          "Name mismatch with Aadhaar"
+        ],
+        "documentNeeded": "bank_passbook"
+      },
+      {
+        "step": 6,
+        "title": {
+          "en": "Choose a lender and submit",
+          "hi": "बैंक चुनें और जमा करें"
+        },
+        "officialFieldName": "Preferred Lender / Submit",
+        "instruction": {
+          "en": "Pick a bank near you, submit, and write down the application number. The bank will contact you.",
+          "hi": "अपने पास का बैंक चुनें, जमा करें और आवेदन नंबर लिख लें। बैंक आपसे संपर्क करेगा।"
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Not keeping the application number"
+        ],
+        "documentNeeded": null
+      }
+    ],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "pm-svanidhi",
+    "name": {
+      "en": "PM SVANidhi (PM Street Vendor's AtmaNirbhar Nidhi)"
+    },
+    "ministry": "Ministry of Housing and Urban Affairs",
+    "level": "central",
+    "category": "finance",
+    "benefitAmount": 15000,
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "PM SVANidhi portal",
+        "url": "https://pmsvanidhi.mohua.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://pmsvanidhi.mohua.gov.in/",
+    "benefitSummary": {
+      "en": "Collateral-free loan for street vendors: up to Rs 15,000, then Rs 25,000, then Rs 50,000, with interest subsidy."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "isStreetVendor",
+          "op": "eq",
+          "value": true,
+          "label": "You are a street vendor"
+        },
+        {
+          "field": "residence",
+          "op": "eq",
+          "value": "urban",
+          "label": "You vend in a town or city"
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "label": "Aged 18 or above"
+        }
+      ]
+    },
+    "dataQuality": "curated"
+  },
+  {
+    "states": [],
+    "notChecked": [
+      "Your trade must be one of the listed family-based traditional trades.",
+      "Only one member per family can register."
+    ],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "pm-vishwakarma",
+    "name": {
+      "en": "PM Vishwakarma"
+    },
+    "ministry": "Ministry of Micro, Small and Medium Enterprises",
+    "level": "central",
+    "category": "employment",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      },
+      {
+        "code": "ration_card",
+        "digilockerCanSupply": true
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "PM Vishwakarma portal",
+        "url": "https://pmvishwakarma.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://pmvishwakarma.gov.in/",
+    "benefitSummary": {
+      "en": "Recognition, skill training, toolkit support and low-interest loans for traditional artisans."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "isArtisan",
+          "op": "eq",
+          "value": true,
+          "label": "Works as a traditional artisan or craftsperson"
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "label": "Aged 18 or above"
+        },
+        {
+          "field": "isGovtEmployee",
+          "op": "eq",
+          "value": false,
+          "label": "Not a government employee or pensioner"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [],
+    "notChecked": [],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "pm-mudra-yojana",
+    "name": {
+      "en": "Pradhan Mantri MUDRA Yojana (PMMY)"
+    },
+    "ministry": "Ministry of Finance",
+    "level": "central",
+    "category": "finance",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "MUDRA",
+        "url": "https://www.mudra.org.in/"
+      },
+      {
+        "label": "JanSamarth portal",
+        "url": "https://www.jansamarth.in/"
+      }
+    ],
+    "sourceUrl": "https://www.mudra.org.in/",
+    "benefitSummary": {
+      "en": "Collateral-free business loans for small non-farm enterprises (Shishu, Kishore and Tarun)."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "label": "Aged 18 or above"
+        },
+        {
+          "any": [
+            {
+              "field": "occupation",
+              "op": "eq",
+              "value": "self_employed",
+              "label": "Self-employed"
+            },
+            {
+              "field": "isStreetVendor",
+              "op": "eq",
+              "value": true,
+              "label": "Street vendor"
+            },
+            {
+              "field": "isArtisan",
+              "op": "eq",
+              "value": true,
+              "label": "Artisan"
+            }
+          ],
+          "label": "Runs or plans a small business"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [],
+    "notChecked": [],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "stand-up-india",
+    "name": {
+      "en": "Stand-Up India"
+    },
+    "ministry": "Ministry of Finance",
+    "level": "central",
+    "category": "finance",
+    "reviewNote": "Confirm that the scheme is still open for new loans, and the current terms.",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "caste_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "Stand-Up Mitra portal",
+        "url": "https://www.standupmitra.in/"
+      }
+    ],
+    "sourceUrl": "https://www.standupmitra.in/",
+    "benefitSummary": {
+      "en": "Bank loans from Rs 10 lakh to Rs 1 crore for SC/ST and women entrepreneurs starting a new enterprise."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "label": "Aged 18 or above"
+        },
+        {
+          "any": [
+            {
+              "field": "category",
+              "op": "in",
+              "value": [
+                "SC",
+                "ST"
+              ],
+              "label": "Belongs to SC or ST"
+            },
+            {
+              "field": "gender",
+              "op": "eq",
+              "value": "female",
+              "label": "You are a woman"
+            }
+          ],
+          "label": "SC/ST or a woman"
+        },
+        {
+          "field": "occupation",
+          "op": "in",
+          "value": [
+            "self_employed",
+            "unemployed"
+          ],
+          "label": "Starting or running your own enterprise"
+        }
+      ]
+    },
+    "dataQuality": "needs_review"
+  },
+  {
+    "states": [],
+    "notChecked": [],
+    "applicationSteps": [
+      {
+        "step": 1,
+        "title": {
+          "en": "Open e-Shram registration"
+        },
+        "officialFieldName": "Register on eShram",
+        "instruction": {
+          "en": "On eshram.gov.in choose \"Register on eShram\". Registration is free."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Paying a cyber cafe more than its printing charge"
+        ],
+        "documentNeeded": null
+      },
+      {
+        "step": 2,
+        "title": {
+          "en": "Enter your Aadhaar-linked mobile number"
+        },
+        "officialFieldName": "Aadhaar linked mobile number",
+        "instruction": {
+          "en": "Enter your Aadhaar-linked mobile number and the OTP. Type this only on the official website. DigiScheme never asks for it."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [
+          "Mobile number not linked to Aadhaar"
+        ],
+        "documentNeeded": "aadhaar"
+      },
+      {
+        "step": 3,
+        "title": {
+          "en": "Answer the EPFO / ESIC question"
+        },
+        "officialFieldName": "Are you a member of EPFO / ESIC?",
+        "instruction": {
+          "en": "Choose No only if you are truly not a member of EPFO or ESIC."
+        },
+        "prefillFrom": "isEPFOMember",
+        "commonMistakes": [],
+        "documentNeeded": null
+      },
+      {
+        "step": 4,
+        "title": {
+          "en": "Fill your address"
+        },
+        "officialFieldName": "State / District",
+        "instruction": {
+          "en": "Choose your state and district, and fill your current address."
+        },
+        "prefillFrom": "state",
+        "commonMistakes": [],
+        "documentNeeded": null
+      },
+      {
+        "step": 5,
+        "title": {
+          "en": "Choose your occupation"
+        },
+        "officialFieldName": "Primary Occupation",
+        "instruction": {
+          "en": "Pick the work that matches what you do most. You can add a second occupation."
+        },
+        "prefillFrom": "occupation",
+        "commonMistakes": [
+          "Picking an occupation at random"
+        ],
+        "documentNeeded": null
+      },
+      {
+        "step": 6,
+        "title": {
+          "en": "Enter your bank details"
+        },
+        "officialFieldName": "Bank Account Details",
+        "instruction": {
+          "en": "Type the account number and IFSC from your passbook, on the official website only."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [],
+        "documentNeeded": "bank_passbook"
+      },
+      {
+        "step": 7,
+        "title": {
+          "en": "Download your e-Shram card"
+        },
+        "officialFieldName": "Download UAN Card",
+        "instruction": {
+          "en": "Submit, then download and save your card with the 12-digit UAN."
+        },
+        "prefillFrom": null,
+        "commonMistakes": [],
+        "documentNeeded": null
+      }
+    ],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "e-shram",
+    "name": {
+      "en": "e-Shram registration"
+    },
+    "ministry": "Ministry of Labour and Employment",
+    "level": "central",
+    "category": "employment",
+    "reviewNote": "Sources agree on the lower age of 16 and the EPFO/ESIC and income-tax exclusions. A 2026 government note says \"16 years and above\" while older guidance says 16 to 59: confirm the upper age limit.",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "e-Shram portal",
+        "url": "https://eshram.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://eshram.gov.in/",
+    "benefitSummary": {
+      "en": "Free e-Shram card with a Universal Account Number, linking unorganised workers to social security schemes."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "age",
+          "op": "between",
+          "value": [
+            16,
+            59
+          ],
+          "label": "Age 16 to 59"
+        },
+        {
+          "field": "occupation",
+          "op": "in",
+          "value": [
+            "daily_wage_worker",
+            "self_employed",
+            "farmer"
+          ],
+          "label": "Works in the unorganised sector"
+        },
+        {
+          "field": "isEPFOMember",
+          "op": "eq",
+          "value": false,
+          "label": "Not a member of EPFO or ESIC"
+        },
+        {
+          "field": "isIncomeTaxPayer",
+          "op": "eq",
+          "value": false,
+          "label": "Not an income tax payer"
+        }
+      ]
+    },
+    "dataQuality": "needs_review"
+  },
+  {
+    "states": [
+      "Delhi"
+    ],
+    "notChecked": [
+      "You must not be receiving another pension from the government."
+    ],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "delhi-old-age-pension",
+    "name": {
+      "en": "Delhi Old Age Assistance (Old Age Pension)"
+    },
+    "ministry": "Department of Social Welfare, Government of NCT of Delhi",
+    "level": "state",
+    "category": "pension",
+    "benefitAmount": 24000,
+    "reviewNote": "Eligibility confirmed (60+, 5 years in Delhi, family income under Rs 1 lakh). The monthly amount may have been raised by Rs 500 in 2025: confirm.",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "age_proof",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "domicile_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "income_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "Delhi e-District portal",
+        "url": "https://edistrict.delhigovt.nic.in/"
+      },
+      {
+        "label": "myScheme: Old Age Assistance",
+        "url": "https://www.myscheme.gov.in/schemes/oaa"
+      }
+    ],
+    "sourceUrl": "https://www.myscheme.gov.in/schemes/oaa",
+    "benefitSummary": {
+      "en": "Monthly pension of Rs 2,000 (age 60-69) or Rs 2,500 (age 70+). An increase was announced in 2025: confirm the current amount."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "state",
+          "op": "eq",
+          "value": "Delhi",
+          "label": "Lives in Delhi"
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 60,
+          "label": "Aged 60 or above"
+        },
+        {
+          "field": "annualFamilyIncome",
+          "op": "lte",
+          "value": 100000,
+          "label": "Family income up to Rs 1 lakh per year"
+        },
+        {
+          "field": "yearsInState",
+          "op": "gte",
+          "value": 5,
+          "label": "Has lived in Delhi for at least 5 years"
+        }
+      ]
+    },
+    "dataQuality": "needs_review"
+  },
+  {
+    "states": [
+      "Delhi"
+    ],
+    "notChecked": [],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "delhi-disability-pension",
+    "name": {
+      "en": "Delhi Financial Assistance to Persons with Special Needs"
+    },
+    "ministry": "Department of Social Welfare, Government of NCT of Delhi",
+    "level": "state",
+    "category": "social_security",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "disability_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "domicile_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "income_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "Delhi e-District portal",
+        "url": "https://edistrict.delhigovt.nic.in/"
+      }
+    ],
+    "sourceUrl": "https://socialwelfare.delhi.gov.in/",
+    "benefitSummary": {
+      "en": "Monthly financial assistance for Delhi residents with 40% or more disability."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "state",
+          "op": "eq",
+          "value": "Delhi",
+          "label": "Lives in Delhi"
+        },
+        {
+          "field": "hasDisability",
+          "op": "eq",
+          "value": true,
+          "label": "Has a disability"
+        },
+        {
+          "field": "disabilityPercent",
+          "op": "gte",
+          "value": 40,
+          "label": "Disability of 40% or more"
+        },
+        {
+          "field": "annualFamilyIncome",
+          "op": "lte",
+          "value": 100000,
+          "label": "Family income up to Rs 1 lakh per year"
+        },
+        {
+          "field": "yearsInState",
+          "op": "gte",
+          "value": 5,
+          "label": "Has lived in Delhi for at least 5 years"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [
+      "Delhi"
+    ],
+    "notChecked": [],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "delhi-women-in-distress-pension",
+    "name": {
+      "en": "Delhi Pension Scheme to Women in Distress"
+    },
+    "ministry": "Department of Women and Child Development, Government of NCT of Delhi",
+    "level": "state",
+    "category": "women_child",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "domicile_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "income_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "Delhi e-District portal",
+        "url": "https://edistrict.delhigovt.nic.in/"
+      }
+    ],
+    "sourceUrl": "https://wcd.delhi.gov.in/",
+    "benefitSummary": {
+      "en": "Monthly pension for widowed, divorced, separated or abandoned women living in Delhi."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "state",
+          "op": "eq",
+          "value": "Delhi",
+          "label": "Lives in Delhi"
+        },
+        {
+          "field": "gender",
+          "op": "eq",
+          "value": "female",
+          "label": "You are a woman"
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "label": "Aged 18 or above"
+        },
+        {
+          "field": "maritalStatus",
+          "op": "in",
+          "value": [
+            "widowed",
+            "divorced",
+            "separated"
+          ],
+          "label": "Widowed, divorced or separated"
+        },
+        {
+          "field": "annualFamilyIncome",
+          "op": "lte",
+          "value": 100000,
+          "label": "Family income up to Rs 1 lakh per year"
+        },
+        {
+          "field": "yearsInState",
+          "op": "gte",
+          "value": 5,
+          "label": "Has lived in Delhi for at least 5 years"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [
+      "Delhi"
+    ],
+    "notChecked": [],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "delhi-jai-bhim-coaching",
+    "name": {
+      "en": "Jai Bhim Mukhyamantri Pratibha Vikas Yojana (Delhi)"
+    },
+    "ministry": "Department for the Welfare of SC/ST/OBC, Government of NCT of Delhi",
+    "level": "state",
+    "category": "education",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "caste_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "income_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "domicile_certificate",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "school_certificate",
+        "digilockerCanSupply": true
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "Delhi SC/ST/OBC Welfare Department",
+        "url": "https://scstwelfare.delhi.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://scstwelfare.delhi.gov.in/",
+    "benefitSummary": {
+      "en": "Free coaching for competitive exams for SC, ST, OBC and EWS students of Delhi."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "state",
+          "op": "eq",
+          "value": "Delhi",
+          "label": "Lives in Delhi"
+        },
+        {
+          "field": "category",
+          "op": "in",
+          "value": [
+            "SC",
+            "ST",
+            "OBC",
+            "EWS"
+          ],
+          "label": "Belongs to SC, ST, OBC or EWS"
+        },
+        {
+          "field": "annualFamilyIncome",
+          "op": "lte",
+          "value": 800000,
+          "label": "Family income up to Rs 8 lakh per year"
+        },
+        {
+          "field": "educationLevel",
+          "op": "in",
+          "value": [
+            "class_11_12",
+            "undergraduate",
+            "postgraduate"
+          ],
+          "label": "Studying in or passed Class 11-12 or college"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  },
+  {
+    "states": [
+      "Tamil Nadu"
+    ],
+    "notChecked": [
+      "Family land must not exceed 5 acres of wetland or 10 acres of dryland.",
+      "Household electricity use must be under 3,600 units a year.",
+      "Families that own a four-wheeler are excluded.",
+      "Applications are taken at ration shops and special camps when registration is open."
+    ],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "tn-kalaignar-magalir-urimai-thogai",
+    "name": {
+      "en": "Kalaignar Magalir Urimai Thogai (Tamil Nadu)"
+    },
+    "ministry": "Government of Tamil Nadu",
+    "level": "state",
+    "category": "women_child",
+    "benefitAmount": 12000,
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "ration_card",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "bank_passbook",
+        "digilockerCanSupply": false
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "KMUT portal",
+        "url": "https://kmut.tn.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://kmut.tn.gov.in/",
+    "benefitSummary": {
+      "en": "Rs 1,000 every month to the woman head of an eligible family in Tamil Nadu."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "state",
+          "op": "eq",
+          "value": "Tamil Nadu",
+          "label": "Lives in Tamil Nadu"
+        },
+        {
+          "field": "gender",
+          "op": "eq",
+          "value": "female",
+          "label": "You are a woman"
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 21,
+          "label": "Aged 21 or above"
+        },
+        {
+          "field": "isHeadOfFamily",
+          "op": "eq",
+          "value": true,
+          "label": "You are the woman head of the family on the ration card"
+        },
+        {
+          "field": "annualFamilyIncome",
+          "op": "lt",
+          "value": 250000,
+          "label": "Family income below Rs 2.5 lakh per year"
+        },
+        {
+          "field": "isIncomeTaxPayer",
+          "op": "eq",
+          "value": false,
+          "label": "No one in the family pays income tax"
+        },
+        {
+          "field": "isGovtEmployee",
+          "op": "eq",
+          "value": false,
+          "label": "No government employee or government pensioner in the family"
+        }
+      ]
+    },
+    "dataQuality": "curated"
+  },
+  {
+    "states": [
+      "Tamil Nadu"
+    ],
+    "notChecked": [],
+    "applicationSteps": [],
+    "machineTranslated": true,
+    "lastVerifiedOn": "2026-11-14",
+    "slug": "tn-cm-health-insurance",
+    "name": {
+      "en": "Chief Minister's Comprehensive Health Insurance Scheme (Tamil Nadu)"
+    },
+    "ministry": "Government of Tamil Nadu",
+    "level": "state",
+    "category": "health",
+    "documentsRequired": [
+      {
+        "code": "aadhaar",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "ration_card",
+        "digilockerCanSupply": true
+      },
+      {
+        "code": "income_certificate",
+        "digilockerCanSupply": true
+      }
+    ],
+    "officialLinks": [
+      {
+        "label": "Government of Tamil Nadu",
+        "url": "https://www.tn.gov.in/"
+      }
+    ],
+    "sourceUrl": "https://www.tn.gov.in/",
+    "benefitSummary": {
+      "en": "Cashless hospital treatment cover for low-income families in Tamil Nadu."
+    },
+    "eligibilityRules": {
+      "ruleVersion": "2026-11-14",
+      "all": [
+        {
+          "field": "state",
+          "op": "eq",
+          "value": "Tamil Nadu",
+          "label": "Lives in Tamil Nadu"
+        },
+        {
+          "field": "annualFamilyIncome",
+          "op": "lte",
+          "value": 120000,
+          "label": "Family income up to Rs 1.2 lakh per year"
+        }
+      ]
+    },
+    "dataQuality": "needs_review",
+    "reviewNote": "Criteria not re-confirmed against the official page in this review pass."
+  }
+]
