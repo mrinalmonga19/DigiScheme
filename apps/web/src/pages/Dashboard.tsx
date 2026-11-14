@@ -9,7 +9,7 @@ import { useApp } from '../state/app';
 const STATUSES = ['planned', 'documents_ready', 'submitted', 'approved', 'rejected'] as const;
 
 export default function Dashboard() {
-  const { t } = useApp();
+  const { t, language } = useApp();
   const nav = useNavigate();
   const [profile, setProfile] = useState<ProfileResponse | null>(null);
   const [trackers, setTrackers] = useState<TrackerItem[]>([]);
@@ -22,7 +22,7 @@ export default function Dashboard() {
       setProfile(p); setTrackers(tr.trackers); setElig(e);
     } catch { setError(true); }
   }, []);
-  useEffect(() => { void load(); }, [load]);
+  useEffect(() => { void load(); }, [load, language]);
 
   const verifiedCount = elig?.cards.filter((c) => c.badge === 'verified').length ?? 0;
   const due = trackers.filter((x) => x.reminderAt && new Date(x.reminderAt) <= new Date() && ['planned', 'documents_ready'].includes(x.status));

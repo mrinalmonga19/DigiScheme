@@ -17,7 +17,7 @@ export interface GuardReport {
 }
 
 const BANNED: Array<{ id: string; re: RegExp }> = [
-  { id: 'guarantee', re: /[^.!?।\n]*\b(guarantee[ds]?|100\s?%\s?(sure|approved|guaranteed)|definitely (get|receive|be approved))\b[^.!?।\n]*[.!?।]?/giu },
+  { id: 'guarantee', re: /[^.!?।\n]*\b(guarantee[ds]?\s+to\s+(get|receive)|(i|we)\s+guarantee|guarantee[ds]?\s+(approval|benefit)|100\s?%\s?(sure|approved|guaranteed)|definitely (get|receive|be approved))\b[^.!?।\n]*[.!?।]?/giu },
   { id: 'auto_submitted', re: /[^.!?।\n]*\b(i|we)\s+(have\s+|already\s+|just\s+)*(submitted|filed|applied)\b[^.!?।\n]*\b(application|form)\b[^.!?।\n]*[.!?।]?/giu },
   { id: 'asks_fee', re: /[^.!?।\n]*\b(pay|send|transfer)\s+(us|me|rs\.?|₹|a fee)\b[^.!?।\n]*[.!?।]?/giu },
   { id: 'asks_secret', re: /[^.!?।\n]*\b(share|send|tell|enter|give)\b[^.!?।\n]{0,25}\b(your\s+)?(otp|aadhaar number|pin|password|cvv)\b[^.!?।\n]{0,10}\b(here|to me|with me|in this chat)\b[^.!?।\n]*[.!?।]?/giu },

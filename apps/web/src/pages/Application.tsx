@@ -8,14 +8,18 @@ import { useApp } from '../state/app';
 
 export default function Application() {
   const { id = '' } = useParams();
-  const { t } = useApp();
+  const { t, language } = useApp();
   const nav = useNavigate();
   const [v, setV] = useState<GuideStepView | null>(null);
   const [error, setError] = useState(false);
   const [saved, setSaved] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => { api.application(id).then((r) => setV(r.view)).catch(() => setError(true)); }, [id]);
+  useEffect(() => {
+    let active = true;
+    api.application(id).then((r) => { if (active) setV(r.view); }).catch(() => { if (active) setError(true); });
+    return () => { active = false; };
+  }, [id, language]);
   const act = useCallback(async (a: string) => { try { setV((await api.step(id, a)).view); } catch { setError(true); } }, [id]);
   const track = async () => { if (v) { await api.addTracker(v.schemeSlug, 7); setSaved(true); } };
   const copy = async () => { if (v?.prefill) { try { await navigator.clipboard.writeText(v.prefill.value); setCopied(true); setTimeout(() => setCopied(false), 1500); } catch { /* clipboard blocked */ } } };

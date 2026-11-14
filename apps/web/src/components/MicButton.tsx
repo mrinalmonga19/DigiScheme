@@ -5,7 +5,7 @@ import { canRecognise, canRecord, recogniseOnce, startRecording, type Recording 
 
 type Result = { kind: 'audio'; blob: Blob } | { kind: 'text'; text: string };
 
-/** Tap to start, tap to stop. Works with MediaRecorder (server ASR) or the browser recogniser; hides itself if neither exists. */
+/** Tap to start, tap to stop. Prefer browser speech recognition; use MediaRecorder when it is unavailable. */
 export function MicButton({ onResult, onError, disabled }: { onResult: (r: Result) => void | Promise<void>; onError: (message: string) => void; disabled?: boolean }) {
   const { t, bcp47 } = useApp();
   const [state, setState] = useState<'idle' | 'listening' | 'busy'>('idle');
@@ -16,9 +16,12 @@ export function MicButton({ onResult, onError, disabled }: { onResult: (r: Resul
 
   const start = async () => {
     try {
-      if (canRecord()) { rec.current = await startRecording(); setState('listening'); return; }
-      reco.current = recogniseOnce(bcp47); setState('listening');
-      const text = await reco.current.result; setState('busy'); await onResult({ kind: 'text', text });
+      if (canRecognise()) {
+        reco.current = recogniseOnce(bcp47); setState('listening');
+        const text = await reco.current.result; setState('busy'); await onResult({ kind: 'text', text });
+      } else if (canRecord()) {
+        rec.current = await startRecording(); setState('listening');
+      }
     } catch {
       onError(t.bot.voiceUnavailable);
     } finally {

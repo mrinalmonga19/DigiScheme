@@ -73,10 +73,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => { document.documentElement.dataset.lowBandwidth = String(lowBandwidth); }, [lowBandwidth]);
 
   const setLanguage = useCallback(async (code: string) => {
-    setLang(code); writeJson('ds.lang', code); // instant: the UI never waits on the network to change language
     if (session?.authenticated) {
-      try { apply(await api.settings({ language: code })); } catch (e) { if (!(e instanceof ApiError && e.code === 'OFFLINE')) throw e; }
+      try {
+        apply(await api.settings({ language: code }));
+        return;
+      } catch (e) {
+        setLang(code); writeJson('ds.lang', code);
+        if (!(e instanceof ApiError && e.code === 'OFFLINE')) throw e;
+        return;
+      }
     }
+    setLang(code); writeJson('ds.lang', code);
   }, [apply, session?.authenticated]);
 
   const setLowBandwidth = useCallback(async (on: boolean) => {

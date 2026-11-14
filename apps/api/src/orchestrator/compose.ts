@@ -103,14 +103,23 @@ export function composeReply(results: ToolResult[], opts: ComposeOptions): strin
       case 'update_profile': {
         const v = r.result as UpdateProfileResult;
         question = v.nextQuestion;
-        if (v.applied.length > 0 && !results.some((x) => x.name === 'run_eligibility')) blocks.push(b.noted);
+        if (v.applied.length > 0) blocks.push(b.noted);
         break;
       }
       case 'run_eligibility': {
         const v = r.result as EligibilityToolResult;
         question = v.nextQuestion;
-        sawResults = true;
-        blocks.push(v.cards.length ? renderResults(v, lang) : b.resultsNone);
+        if (v.cards.length > 0) {
+          sawResults = true;
+          if (question) {
+            const target = v.cards.find((c) => c.badge === 'needs_info') ?? v.cards[0]!;
+            blocks.push(fmt(b.needInfoFor, { scheme: label(target.name, target.officialName, lang) }));
+          } else {
+            blocks.push(renderResults(v, lang));
+          }
+        } else if (!results.some((x) => x.name === 'update_profile')) {
+          blocks.push(b.resultsNone);
+        }
         break;
       }
       case 'get_scheme_details':

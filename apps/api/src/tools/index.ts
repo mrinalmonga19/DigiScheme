@@ -6,7 +6,7 @@
 import { z } from 'zod';
 import {
   DOCUMENT_CODES, FIELD_DEFS, FIELD_KEYS, profileCompleteness, tr,
-  type DocumentCode, type FieldKey, type SchemeCategory, type StepAction, type TrackerStatus,
+  type DocumentCode, type FieldKey, type Profile, type SchemeCategory, type StepAction, type TrackerStatus,
 } from '@digischeme/shared';
 import { isEligible, runEligibility } from '../eligibility';
 import type { ToolDecl } from '../llm/types';
@@ -71,12 +71,12 @@ export function toolDeclarations(slugs: string[]): ToolDecl[] {
   return [
     {
       name: 'update_profile',
-      description: 'Save profile facts the user stated. Use only values the user actually said. Never guess. Income is rupees per YEAR.',
+      description: 'Save profile facts the user stated. Use only values the user actually said. Never guess. Income is rupees per YEAR. After saving, ask the next missing core field (state → age → occupation → annualFamilyIncome → category) before calling run_eligibility.',
       parameters: { type: 'object', properties: { fields: { type: 'object', properties: profileFieldProperties() } }, required: ['fields'] },
     },
     {
       name: 'run_eligibility',
-      description: 'Run the deterministic eligibility engine on the saved profile. ALWAYS call this to know what the user qualifies for. Never decide eligibility yourself.',
+      description: 'Run the deterministic eligibility engine on the saved profile. Only call this AFTER state, age, occupation, annualFamilyIncome, and category are all known. Never call it with fewer than these 5 fields. Never decide eligibility yourself.',
       parameters: { type: 'object', properties: { intent: { type: 'array', items: { type: 'string', enum: [...SCHEME_CATEGORIES] } } } },
     },
     {
